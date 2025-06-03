@@ -105,7 +105,7 @@ Create code tutorials with the help of AI
 
 Find, save, and share terminal commands—collaboratively.
 
-**This project won 2nd place at a hackathon sponsored by Facebook. I was awarded a $10,000 check:**
+**This project won 2nd place at a hackathon sponsored by Facebook. I was awarded a $10,000 check.** [View project details](https://devpost.com/software/kommandr-u1xcqg)
 
 ![Happy Image](happy.jpeg)
 
