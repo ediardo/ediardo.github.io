@@ -2,30 +2,27 @@
 
 Most recent first
 
-## Timelapso 
+## LinkaCam 
 
 ### Goal
 
-Build a GUI to control Canon cameras over WiFi, with an embedded LLM chatbot interface for agentic interaction.
+To simplify and enhance photography workflows by combining AI-powered tethered camera control with intelligent, real-time image editing through natural language commands.
 
 ### Features
 
-- 🤖 Operate the camera using an LLM agent capable of interpreting and executing natural language commands
-- 🔧 View and adjust shooting settings via form inputs  
-- 📺 View a live video stream from the camera  
-- 📸 Take photos remotely  
-- ⬇️ Auto-download photos as they're captured  
-- 🎯 Set autofocus position by clicking or describing a point in the frame
+- **AI-powered tethered camera control** – Automate shooting, adjust settings, and focus remotely with natural language commands.  
+- **Generative AI integration** – Apply text-to-image and image-to-image edits (e.g., recolor clothing, replace backgrounds) instantly during shoots.  
+- **Intervalometer & task automation** – Schedule complex shooting actions (e.g., timed sequences) without manual input.  
+- **Real-time image transfer & editing** – Instantly preview, edit, and iterate on photos as they are captured.  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OiTpYCwAw8A?si=NM_bmKWl_Cag-VwN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nN_x1r4f6-I?si=5o_hjlfx_yyVhqgR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Tech Stack:
-- Electron
+- Electron, TypeScript, Python
 - React
-- Tailwind CSS
 - LangChain
-- AI Providers: OpenAI, Anthropic, Gemini, llama
-- TypeScript
+- AI Providers: OpenAI, Anthropic, Gemini, llama, PhotoRoom, StabilityAI
 
 
 ## Canon MCP Server
