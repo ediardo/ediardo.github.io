@@ -72,7 +72,14 @@ Content WIP
 
 ## ExplainDev VS Code Extension
 
-Content WIP
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0GMIH8dysJg?si=nGI1r5iMt7t0N2Xl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Features
+
+- Explain any code block in any website
+- Ask follow up questions
+- Ask questions about specific parts of the code
+
 
 ## ExplainDev Code Snippets
 
