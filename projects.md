@@ -69,9 +69,29 @@ Search local images using natural language queries via **Vision Transformer** em
 
 ## ExplainDev VS Code Extension
 
-Content WIP
+### Goal
 
+Provide AI-powered code explanations directly within VS Code to help developers understand complex codebases faster.
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mnn_7p4_QoU?si=OvcsqaANFZyG9o4X" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### Features
+
+- Right-click code explanations
+- Follow-up questions
+- Links to documentations
+- Line-by-line code navigation
+
+### Tech Stack
+ 
+ - TypeScript
+ - MySQL
+ - VS Code Extension
+ - React
+ 
 ## ExplainDev Browser Extension
+
 ### Goal
 
 Help you understand somebody else's code on StackOverflow and docs websites.
