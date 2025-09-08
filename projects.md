@@ -66,11 +66,15 @@ Search local images using natural language queries via **Vision Transformer** em
 - Transformers: SigLIP-2, CLIP
 
 
-## ExplainDev Browser Extension
+
+## ExplainDev VS Code Extension
 
 Content WIP
 
-## ExplainDev VS Code Extension
+## ExplainDev Browser Extension
+### Goal
+
+Help you understand somebody else's code on StackOverflow and docs websites.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0GMIH8dysJg?si=nGI1r5iMt7t0N2Xl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -80,6 +84,11 @@ Content WIP
 - Ask follow up questions
 - Ask questions about specific parts of the code
 
+### Tech Stack
+
+- TypeScript
+- AI provider: OpenAI (Codex Model Private Beta)
+- Browser Extension
 
 ## ExplainDev Code Snippets
 
