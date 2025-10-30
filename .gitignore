@@ -1,0 +1,24 @@
+# Hugo build artifacts
+public/
+resources/
+resources/_gen/
+.hugo_build.lock
+.hugo_cache/
+
+# Node (if you use theme tooling)
+node_modules/
+
+# Logs
+*.log
+
+# Local env files
+.env
+.env.*
+
+# Editors/IDE
+.vscode/
+.idea/
+
+# OS Junk
+.DS_Store
+Thumbs.db
