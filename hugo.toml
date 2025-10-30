@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://ediardo.com/'
 languageCode = 'en-us'
 title = 'Eddie Ramirez'
 theme = 'PaperMod'
@@ -6,3 +6,6 @@ theme = 'PaperMod'
 [markup.goldmark.renderer]
     unsafe = true
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
