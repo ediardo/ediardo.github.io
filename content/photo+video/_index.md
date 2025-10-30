@@ -4,7 +4,6 @@ title = 'photo+video'
 weight = 3
 +++
 
-What I love about photography is that it asks for something I have in abundance: patience, and rewards it beautifully.
 
 ### Gear
 
@@ -17,10 +16,16 @@ What I love about photography is that it asks for something I have in abundance:
 - Canon EF 50mm f/1.8 STM
 - Canon EF 100mm f/2.8L IS USM
 
+### Storage
+
+- 1x 256 GB SD Card
+- 2x 128 GB SD Card
+
 #### Accessories
 
--  Tripod
--  Camera Bag
+- Tripod
+- Camera Bag
+- Cage
 
 <iframe width="315" height="560"
 src="https://www.youtube.com/embed/wctefKd-vQU?controls=0&modestbranding=1&showinfo=0"
