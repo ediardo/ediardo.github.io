@@ -1,6 +1,6 @@
 +++
 menus = 'main'
-title = 'books'
+title = 'reads'
 weight = 5
 +++
 
@@ -33,6 +33,14 @@ weight = 5
   line-height: 1.2;
 }
 
+.reading-now { display: grid; gap: 16px; }
+.reading-item { display: flex; gap: 16px; align-items: center; flex-direction: column; }
+.reading-item .cover { flex: 0 0 128px; }
+.reading-item .cover img { width: 128px; height: auto; border-radius: 8px; display: block; }
+.reading-item .details { flex: none; text-align: center; }
+.reading-item .details h3 { margin: 8px 0 0; font-size: 1.1rem; }
+.reading-item .details .meta { margin: 4px 0 0; color: var(--secondary); font-size: 0.95rem; }
+
 @media (max-width: 768px) {
   .books-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -45,13 +53,46 @@ Some of the books I could remember that I read. I have great interest in reading
 
 - Science & Technology
 - Philosophy, Psychology
-- Business & Leadershipwhat 
+- Business & Leadershipwhat
 - Personal Development
 - Some Fiction
 
+
+## reading now
+
+<div class="reading-now">
+  <article class="reading-item">
+    <div class="cover">
+      <img src="https://covers.openlibrary.org/b/isbn/0316182311-M.jpg" alt="The Violinist's Thumb">
+    </div>
+    <div class="details">
+      <h3>The Violinist's Thumb</h3>
+    </div>
+  </article>
+  <article class="reading-item">
+    <div class="cover">
+      <img src="
+  https://covers.openlibrary.org/b/isbn/8433998773-M.jpg" alt="The Violinist's Thumb">
+    </div>
+    <div class="details">
+      <h3>Canto Yo y la Montaña Baila</h3>
+    </div>
+  </article>
+  <article class="reading-item">
+    <div class="cover">
+      <img src="https://covers.openlibrary.org/b/isbn/0060391685-M.jpg" alt="Story: Substance, Structure, Style and the Principles of Screenwriting ">
+    </div>
+    <div class="details">
+      <h3>Story: Substance, Structure, Style and the Principles of Screenwriting</h3>
+    </div>
+  </article>
+</div>
+
+## past books
+
 <div class="books-grid">
 <div class="book-item"><img src="https://covers.openlibrary.org/b/isbn/9780817463007-M.jpg" alt="Understanding Exposure, Fourth Edition: How to Shoot Great Photographs with Any Camera"></div>
-<div class="book-item"><img src="https://covers.openlibrary.org/b/isbn/0060391685-M.jpg" alt="Story: Substance, Structure, Style and the Principles of Screenwriting "></div>
+
 <div class="book-item"><img src="https://covers.openlibrary.org/b/isbn/0060801719-M.jpg" alt="The Doors of Perception — Aldous Huxley"></div>
 <div class="book-item"><img src="https://covers.openlibrary.org/b/isbn/0593728696-M.jpg" alt="A Different Kind of Power — Jacinda Ardern"></div>
 <div class="book-item"><img src="https://covers.openlibrary.org/b/isbn/9781535585958-M.jpg" alt="How to Day Trade for a Living"></div>

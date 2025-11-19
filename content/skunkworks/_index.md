@@ -4,7 +4,7 @@ title = 'skunkworks'
 weight = 2
 +++
 
-An unfinished list of projects that I've build because I love building.
+An unfinished list of projects that I've built because I love building.
 
 Most recent first.
 
