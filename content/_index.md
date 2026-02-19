@@ -4,6 +4,8 @@
     I am Edi, and I'm building <a href="https://www.linkacam.com" target="_blank">software for nature photographers</a>
   </h2>
 
+
+
   <p style="text-align: justify; line-height: 2;">
     A little about me: <strong>I'm an engineer by trade who's been hacking with computers since the late ’90s.</strong> I created this website to share my story and my projects.
   </p>
@@ -29,5 +31,22 @@
       · <a href="https://github.com/ediardo" target="_blank" rel="noopener noreferrer">GitHub</a>
   · <a href="mailto: djedir@gmail.com" target="_blank" rel="noopener noreferrer">djedir@gmail.com</a>
 
+ <div id="inat"></div>
+
+<script>
+fetch("https://api.inaturalist.org/v1/observations?user_id=ediardo&order=desc&order_by=created_at&per_page=1")
+  .then(r => r.json())
+  .then(data => {
+    const obs = data.results[0];
+    const species = obs.taxon?.name ?? "Unknown species";
+    const img = obs.photos?.[0]?.url?.replace("square", "medium");
+
+    const url = "https://www.inaturalist.org/observations/" + obs.id;
+    document.getElementById("inat").innerHTML = `
+      <p><a href="${url}" target="_blank" rel="noopener noreferrer"><img src="${img}" alt="${species}"></a></p>
+      <p><a href="${url}" target="_blank" rel="noopener noreferrer">Latest observation on iNaturalist: ${species}.</a></p>
+    `;
+  });
+</script>
 </p>
 </div>

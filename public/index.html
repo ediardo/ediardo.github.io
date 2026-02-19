@@ -75,7 +75,8 @@
 </script>
 </head>
 <body class="list" id="top">
-    <header class="header">
+    
+<header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="Edi&#39;s Website (Alt + H)">Edi&#39;s Website</a>
@@ -155,6 +156,22 @@
 <p><a href="https://www.linkedin.com/in/ediardo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 · <a href="https://github.com/ediardo" target="_blank" rel="noopener noreferrer">GitHub</a>
 · <a href="mailto: djedir@gmail.com" target="_blank" rel="noopener noreferrer"><a href="mailto:djedir@gmail.com">djedir@gmail.com</a></a></p>
+ <div id="inat"></div>
+<script>
+fetch("https://api.inaturalist.org/v1/observations?user_id=ediardo&order=desc&order_by=created_at&per_page=1")
+  .then(r => r.json())
+  .then(data => {
+    const obs = data.results[0];
+    const species = obs.taxon?.name ?? "Unknown species";
+    const img = obs.photos?.[0]?.url?.replace("square", "medium");
+
+    const url = "https://www.inaturalist.org/observations/" + obs.id;
+    document.getElementById("inat").innerHTML = `
+      <p><a href="${url}" target="_blank" rel="noopener noreferrer"><img src="${img}" alt="${species}"></a></p>
+      <p><a href="${url}" target="_blank" rel="noopener noreferrer">Latest observation on iNaturalist: ${species}.</a></p>
+    `;
+  });
+</script>
 </p>
 </div>
 
