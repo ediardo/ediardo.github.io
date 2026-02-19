@@ -1,6 +1,6 @@
 baseURL = 'https://ediardo.com/'
 languageCode = 'en-us'
-title = 'Eddie Ramirez'
+title = "Edi's Website"
 theme = 'PaperMod'
 
 [markup.goldmark.renderer]
