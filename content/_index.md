@@ -4,32 +4,33 @@
     I am Edi, and I'm building <a href="https://www.linkacam.com" target="_blank">software for nature photographers</a>
   </h2>
 
-
-
   <p style="text-align: justify; line-height: 2;">
-    A little about me: <strong>I'm an engineer by trade who's been hacking with computers since the late ’90s.</strong> I created this website to share my story and my projects.
+    A little about me: <strong>I'm an engineer by trade who's been hacking with computers since the late ’90s.</strong> I created this website to share my story, photos, and my projects.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    I live in Petaluma, California, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>, along with the struggle and reward that come with it. Photography grew naturally from that experience.
+    I live in Petaluma, California, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>, along with the struggle and reward that come with it. Photography grew naturally from that experience. I don't want this to stop.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    <strong>My most monetizable skill is coding. I can build products and talk to users.</strong> I did a lot of programming for Intel for about nine years. Then, I cofounded ExplainDev, a AI devtool startup that helped people understand somebody else's code. I’ve also worked with computer vision models to solve real-world factory problems for enterprise customers. 
+    <strong>My most monetizable skill is coding. I can build products and talk to users.</strong> I did a lot of programming for Intel for about nine years. Then, I cofounded ExplainDev, a AI devtool startup that helped people understand somebody else's code, where I had a chance to work with LLMs before frameworks/libraries were a thing. I’ve also worked with computer vision models to solve real-world factory problems for enterprise customers at a <a href="https://roboflow.com" target="_blank">startup in SF</a>.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    <strong>Most of the code I write today is in TypeScript and some Python. I have solid experience as a full-stack developer, have been a database admin, mentor to junior devs, a hackathon winner, cloud operator</strong>, and overall, a sparker of new projects. On the machine learning side, I’ve worked with different model architectures and modalities both locally and in the cloud.
+    <strong>Most of the code I write today is in TypeScript and some Python. I have solid experience as a full-stack developer, have been a database admin, mentor to junior devs, a hackathon winner, cloud operator, and overall, a sparker of new projects</strong> On the machine learning side, I’ve worked with different model architectures and modalities both locally and in the cloud.
+  </p>
+
+  <p style="text-align: justify; line-height: 2;">
+    When I'm not in my computer, I'm usually outside doing one of these things: spending time with my wife, photographing insects with macro lenses, birding, playing tennis, biking, hiking, paddling an outrigger canoe, and ocassionally playing video games. 
   </p>
 
   <p style="text-align: justify; line-height: 2;">
     Today, I'm building software that nurtures my curiosity of exploring nature and the way I document it with my camera.
   </p>
 
-
-  <a href="https://www.linkedin.com/in/ediardo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      · <a href="https://github.com/ediardo" target="_blank" rel="noopener noreferrer">GitHub</a>
-  · <a href="mailto: djedir@gmail.com" target="_blank" rel="noopener noreferrer">djedir@gmail.com</a>
+<a href="https://www.linkedin.com/in/ediardo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+· <a href="https://github.com/ediardo" target="_blank" rel="noopener noreferrer">GitHub</a>
+· <a href="mailto: djedir@gmail.com" target="_blank" rel="noopener noreferrer">djedir@gmail.com</a>
 
  <div id="inat"></div>
 
