@@ -53,7 +53,7 @@ Some of the books I could remember that I read. I have great interest in reading
 
 - Science & Technology
 - Philosophy, Psychology
-- Business & Leadershipwhat
+- Business & Leadership
 - Personal Development
 - Some Fiction
 
