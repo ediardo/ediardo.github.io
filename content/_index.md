@@ -21,7 +21,7 @@
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    When I'm not in my computer, I'm usually outside doing one of these things: spending time with my wife, photographing insects with macro lenses, birding, playing tennis, biking, hiking, paddling an outrigger canoe, and ocassionally playing video games. 
+    When I'm not in my computer, I: spend time with my wife, photograph, bird watch, play tennis, bike, hike, paddle an outrigger canoe, and ocassionally play video games. 
   </p>
 
   <p style="text-align: justify; line-height: 2;">

@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://ediardo.com/photos/amphibians-and-reptiles/</loc></url><url><loc>https://ediardo.com/work/</loc></url><url><loc>https://ediardo.com/photos/birds/</loc></url><url><loc>https://ediardo.com/skunkworks/</loc></url><url><loc>https://ediardo.com/photos/fungi/</loc></url><url><loc>https://ediardo.com/photos/</loc></url><url><loc>https://ediardo.com/photos/arthropods/</loc></url><url><loc>https://ediardo.com/photos/landscapes/</loc></url><url><loc>https://ediardo.com/links/</loc></url><url><loc>https://ediardo.com/reads/</loc></url><url><loc>https://ediardo.com/photos/mammals/</loc></url><url><loc>https://ediardo.com/photos/plants/</loc></url><url><loc>https://ediardo.com/photos/sports/</loc></url><url><loc>https://ediardo.com/</loc></url><url><loc>https://ediardo.com/categories/</loc></url><url><loc>https://ediardo.com/tags/</loc></url></urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:1313/photos/amphibians-and-reptiles/</loc>
+  </url><url>
+    <loc>http://localhost:1313/work/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/birds/</loc>
+  </url><url>
+    <loc>http://localhost:1313/skunkworks/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/fungi/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/arthropods/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/landscapes/</loc>
+  </url><url>
+    <loc>http://localhost:1313/links/</loc>
+  </url><url>
+    <loc>http://localhost:1313/reads/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/mammals/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/plants/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/sports/</loc>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+  </url>
+</urlset>
