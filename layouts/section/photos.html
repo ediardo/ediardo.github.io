@@ -1,0 +1,25 @@
+{{- define "main" -}}
+{{- $isCategory := and (eq .Section "photos") (not (eq .FirstSection .)) -}}
+{{- if not .IsHome | and .Title }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{ .Title }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+{{- if $isCategory }}{{ partial "photos-masonry-css.html" . }}{{ partial "photos-gallery-overlay.html" . }}{{ end }}
+{{- end }}

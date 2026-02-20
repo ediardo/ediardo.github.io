@@ -1,0 +1,25 @@
+<style>
+.masonry-grid {
+  width: 100%;
+  column-count: 3;
+  column-gap: 0.75rem;
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+.masonry-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+@media (max-width: 768px) {
+  .masonry-grid { column-count: 2; }
+}
+main {
+  max-width: none !important;
+  width: 100%;
+}
+</style>

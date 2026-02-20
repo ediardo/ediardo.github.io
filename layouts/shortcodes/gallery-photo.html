@@ -1,0 +1,13 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $size := .Get "size" | default "800x" -}}
+{{- with resources.Get $src -}}
+  {{- $fullURL := .RelPermalink -}}
+  {{- $img := .Resize $size -}}
+  <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $fullURL }}" title="View full size">
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}" loading="lazy">
+  </span>
+{{- else -}}
+  {{- warnf "gallery-photo shortcode: image not found: %s" $src -}}
+  <img src="" alt="{{ $alt }}" loading="lazy">
+{{- end -}}

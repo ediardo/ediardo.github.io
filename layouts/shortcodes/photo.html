@@ -1,0 +1,11 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $size := .Get "size" | default "800x" -}}
+{{- $class := .Get "class" | default "" -}}
+{{- with resources.Get $src -}}
+  {{- $img := .Resize $size -}}
+  <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}" loading="lazy"{{ with $class }} class="{{ . }}"{{ end }}>
+{{- else -}}
+  {{- warnf "photo shortcode: image not found: %s" $src -}}
+  <img src="" alt="{{ $alt }}" loading="lazy"{{ with $class }} class="{{ . }}"{{ end }}>
+{{- end -}}

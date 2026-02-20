@@ -37,12 +37,12 @@
   <h3 style="margin: 0;">Photos</h3>
   <a href="/photos" style="margin-left: auto;">All Photos</a>
 </div>
-<style>.home-photos-grid img { margin: 0 !important; border-radius: 0 !important; } #inat img { border-radius: 0 !important; }</style>
+<style>.home-photos-grid img { margin: 0 !important; border-radius: 0 !important; } .home-photos-grid .cover-fill { width: 100%; height: 100%; object-fit: cover; display: block; } #inat img { border-radius: 0 !important; }</style>
 <div class="home-photos-grid" style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 0.5rem; row-gap: 0.5rem; margin-top: 0.5rem; width: 100%;">
-  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;"><img src="/photos/Tui%20Te%20Arero%20Bay%20%202026-01-11-12.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;"><img src="/photos/IMG_0260-2.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;"><img src="/photos/IMG_0266.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;"><img src="/photos/IMG_0034.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;">{{< photo src="photos/Tui Te Arero Bay  2026-01-11-12.jpg" alt="" size="600x" class="cover-fill" >}}</div>
+  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;">{{< photo src="photos/IMG_0260-2.jpg" alt="" size="600x" class="cover-fill" >}}</div>
+  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;">{{< photo src="photos/IMG_0266.jpg" alt="" size="600x" class="cover-fill" >}}</div>
+  <div style="aspect-ratio: 5/4; overflow: hidden; margin: 0;">{{< photo src="photos/IMG_0034.jpg" alt="" size="600x" class="cover-fill" >}}</div>
 </div>
 
 <div id="inat" style="margin-top: 0.5rem;"></div>

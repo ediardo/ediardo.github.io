@@ -8,15 +8,14 @@ weight = 3
 
 
 <div class="photo-blocks">
-  <div class="photo-block"><img src="/photos/IMG_0266 copy.jpg" alt="" /><span class="photo-label">Amphibians and reptiles</span></div>
-  <div class="photo-block"><img src="/photos/Tui Te Arero Bay  2026-01-11-12.jpg" alt="" /><span class="photo-label">Birds</span></div>
-  <div class="photo-block"><img src="/photos/IMG_0106-3.jpg" alt="" /><span class="photo-label">Fungi</span></div>
-  <div class="photo-block"><img src="/photos/IMG_0034.jpg" alt="" /><span class="photo-label">Insects</span></div>
-  <div class="photo-block"><img src="20260119-IMG_0191.jpg" alt="" /><span class="photo-label">Landscapes</span></div>
-  <div class="photo-block"><img src="/photos/IMG_2737.jpg" alt="" /><span class="photo-label">Mammals</span></div>
-  <div class="photo-block"><img src="/photos/IMG_0704.jpg" alt="" /><span class="photo-label">Plants</span></div>
-  <div class="photo-block"><img src="/photos/IMG_3469.JPG" alt="" /><span class="photo-label">Sports</span></div>
-  <!-- <div class="photo-block"><img src="/photos/KirbyCove_074-2.jpg" alt="" /><span class="photo-label">People</span></div> -->
+  <a href="/photos/amphibians-and-reptiles/" class="photo-block">{{< photo src="photos/IMG_0266 copy.jpg" alt="" >}}<span class="photo-label">Amphibians and reptiles</span></a>
+  <a href="/photos/arthropods/" class="photo-block">{{< photo src="photos/IMG_0034.jpg" alt="" >}}<span class="photo-label">Arthropods</span></a>
+  <a href="/photos/birds/" class="photo-block">{{< photo src="photos/Tui Te Arero Bay  2026-01-11-12.jpg" alt="" >}}<span class="photo-label">Birds</span></a>
+  <a href="/photos/fungi/" class="photo-block">{{< photo src="photos/IMG_0106-3.jpg" alt="" >}}<span class="photo-label">Fungi</span></a>
+  <a href="/photos/landscapes/" class="photo-block">{{< photo src="photos/20260119-IMG_0191.jpg" alt="" >}}<span class="photo-label">Landscapes</span></a>
+  <a href="/photos/mammals/" class="photo-block">{{< photo src="photos/IMG_2737.jpg" alt="" >}}<span class="photo-label">Mammals</span></a>
+  <a href="/photos/plants/" class="photo-block">{{< photo src="photos/IMG_0704.jpg" alt="" >}}<span class="photo-label">Plants</span></a>
+  <a href="/photos/sports/" class="photo-block">{{< photo src="photos/IMG_3469.JPG" alt="" >}}<span class="photo-label">Sports</span></a>
 
 <style>
 .photo-blocks {
@@ -31,6 +30,9 @@ weight = 3
   aspect-ratio: 5/4;
   overflow: hidden;
   cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 .photo-block::after {
   content: "";
@@ -66,6 +68,10 @@ weight = 3
 }
 @media (max-width: 768px) {
   .photo-blocks { grid-template-columns: repeat(2, 1fr); }
+}
+main {
+  max-width: none !important;
+  width: 100%;
 }
 </style>
 
