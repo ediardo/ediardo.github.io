@@ -21,10 +21,6 @@
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    When I'm not in my computer, I: spend time with my wife, photograph, bird watch, play tennis, bike, hike, paddle an outrigger canoe, and ocassionally play video games. 
-  </p>
-
-  <p style="text-align: justify; line-height: 2;">
     Today, I'm building software that nurtures my curiosity of exploring nature and the way I document it with my camera.
   </p>
 
