@@ -13,21 +13,16 @@
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    <strong><a href="/work">My most monetizable skill is coding. I can build products and talk to users.</a></strong> The boldest choice I've made in my career is leaving the safety of a big company to found a startup, where I got to learn a lot about the value of solving problems for people.
+    <strong><a href="/resume">My most monetizable skill is coding. I can build products and talk to users.</a></strong> The boldest choice I've made in my career is leaving the safety of a big company to found a startup, where I got to learn a lot about the value of solving problems for people.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    <strong><a href="/work">Most of the code I write today is in TypeScript and Python</a></strong>. I have solid experience as a full-stack developer, have been a mentor to junior devs, a hackathon winner, cloud operator, and overall, a sparker of new projects.</strong> On the machine learning side, I work with different model architectures and modalities both locally and in the cloud.
+    <strong><a href="/resume">Most of the code I write today is in TypeScript and Python</a></strong>. I have solid experience as a full-stack developer, have been a mentor to junior devs, a hackathon winner, cloud operator, and overall, a sparker of new projects.</strong> On the machine learning side, I work with different model architectures and modalities both locally and in the cloud.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
     Today, I'm building software that nurtures my curiosity of exploring nature and the way I document it with my camera.
   </p>
-
-<a href="https://www.linkedin.com/in/ediardo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-· <a href="https://github.com/ediardo" target="_blank" rel="noopener noreferrer">GitHub</a>
-· <a href="mailto: djedir@gmail.com" target="_blank" rel="noopener noreferrer">djedir@gmail.com</a>
-
 
 <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; width: 100%; text-align: left;">
   <h3 style="margin: 0;">Photos</h3>

@@ -1,10 +1,10 @@
 +++
 menus = 'main'
-title = 'work'
+title = 'resume'
 weight = 1
 +++
 
-I’m an engineer from Mazatlán, Mexico, who started coding young and took on small cash tech projects as a teenager, like building websites and fixing computers.
+I'm an engineer from Mazatlán, Mexico, who started coding young and took on small cash tech projects as a teenager, like building websites and fixing computers.
 
 While studying Computer Engineering at university, I started working at Intel in Guadalajara, where I spent nine years in software and cloud development. In 2016, I transferred to San Antonio, Texas, to take part in a collaborative effort between Intel and Rackspace to build OpenStack, an open-source cloud platform aimed at competing with major providers.
 
