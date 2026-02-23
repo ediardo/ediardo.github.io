@@ -2,9 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/contact/</loc>
+  </url><url>
     <loc>http://localhost:1313/photos/amphibians-and-reptiles/</loc>
   </url><url>
-    <loc>http://localhost:1313/work/</loc>
+    <loc>http://localhost:1313/resume/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/birds/</loc>
   </url><url>
@@ -14,7 +16,7 @@
   </url><url>
     <loc>http://localhost:1313/photos/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/arthropods/</loc>
+    <loc>http://localhost:1313/photos/insects/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/landscapes/</loc>
   </url><url>
@@ -27,6 +29,8 @@
     <loc>http://localhost:1313/photos/plants/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/sports/</loc>
+  </url><url>
+    <loc>http://localhost:1313/photos/arachnids/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>

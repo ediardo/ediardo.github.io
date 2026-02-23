@@ -9,9 +9,10 @@ weight = 3
 
 <div class="photo-blocks">
   <a href="/photos/amphibians-and-reptiles/" class="photo-block">{{< photo src="photos/IMG_0266 copy.jpg" alt="" >}}<span class="photo-label">Amphibians and reptiles</span></a>
-  <a href="/photos/arthropods/" class="photo-block">{{< photo src="photos/IMG_0034.jpg" alt="" >}}<span class="photo-label">Arthropods</span></a>
+  <a href="/photos/arachnids/" class="photo-block">{{< photo src="photos/arachnids/IMG_0015-2.jpg" alt="" >}}<span class="photo-label">Arachnids</span></a>
   <a href="/photos/birds/" class="photo-block">{{< photo src="photos/Tui Te Arero Bay  2026-01-11-12.jpg" alt="" >}}<span class="photo-label">Birds</span></a>
   <a href="/photos/fungi/" class="photo-block">{{< photo src="photos/IMG_0106-3.jpg" alt="" >}}<span class="photo-label">Fungi</span></a>
+  <a href="/photos/insects/" class="photo-block">{{< photo src="photos/IMG_0034.jpg" alt="" >}}<span class="photo-label">Insects</span></a>
   <a href="/photos/landscapes/" class="photo-block">{{< photo src="photos/20260119-IMG_0191.jpg" alt="" >}}<span class="photo-label">Landscapes</span></a>
   <a href="/photos/mammals/" class="photo-block">{{< photo src="photos/IMG_2737.jpg" alt="" >}}<span class="photo-label">Mammals</span></a>
   <a href="/photos/plants/" class="photo-block">{{< photo src="photos/IMG_0704.jpg" alt="" >}}<span class="photo-label">Plants</span></a>
