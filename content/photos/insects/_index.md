@@ -23,9 +23,6 @@ weight = 4
   <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0221.jpg" alt="" >}}</div>
   <div class="masonry-item">{{< gallery-photo src="photos/insects/Okere-4.jpg" alt="" >}}</div>
 
-
-  <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0221.jpg" alt="" >}}</div>
-
   <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0060.jpg" alt="" >}}</div>
   <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0742.jpg" alt="" >}}</div>
   <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_5663-2.jpg" alt="" >}}</div>
