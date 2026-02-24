@@ -4,6 +4,8 @@ weight = 4
 +++
 
 <div class="masonry-grid">
+  <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0142-2.jpg" alt="" >}}</div>
+<div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0267.jpg" alt="" >}}</div>
   <div class="masonry-item">{{< gallery-photo src="photos/insects/Okataina  Damselfy-1.jpg" alt="" >}}</div>
 
   <div class="masonry-item">{{< gallery-photo src="photos/insects/IMG_0629-2.jpg" alt="" >}}</div>

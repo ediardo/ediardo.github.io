@@ -1,7 +1,7 @@
 <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
   <img src="/me.jpeg" alt="me" width="100" height="100" style="border-radius: 0; object-fit: cover;" />
   <h3 style="margin: 1em 0; line-height: 1.5;">
-    I am Edi, and I'm building <a href="https://www.linkacam.com" target="_blank">software for nature photographers</a>
+    I am Edi, a software engineer and photographer building  <a href="https://www.linkacam.com" target="_blank">tools for nature photographers</a>
   </h3>
 
   <p style="text-align: justify; line-height: 2;">
@@ -9,11 +9,11 @@
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    I live in Petaluma, California, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>. <a href="/photo+video">Photography grew naturally from that experience</a>.
+    I was born in <a href="https://en.wikipedia.org/wiki/Mazatl%C3%A1n" target="_blank">Mazatlán, México</a> and now live in <a href="https://en.wikipedia.org/wiki/Petaluma,_California" target="_blank">Petaluma, California</a>, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>. <a href="/photo+video">Photography grew naturally from that experience</a>.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    <strong><a href="/resume">My most monetizable skill is coding. I can build products and talk to users.</a></strong> The boldest choice I've made in my career is leaving the safety of a big company to found a startup, where I got to learn a lot about the value of solving problems for people.
+    <strong><a href="/resume">I can program, build products, and talk to users.</a></strong> The boldest choice I've made in my career is founding a startup, where I got to learn a lot about the value of solving problems for people.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
@@ -21,7 +21,7 @@
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    Today, I'm building software that nurtures my curiosity of exploring nature and the way I document it with my camera.
+    Today, <a href="https://www.linkacam.com" target="_blank">I'm building Linkacam</a>, a tool that helps nature photographers spend more time outdoors and less time in front of their computer.
   </p>
 
 <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; width: 100%; text-align: left;">

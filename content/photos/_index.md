@@ -1,7 +1,7 @@
 +++
 menus = 'main'
 title = 'photos'
-weight = 3
+weight = 1
 +++
 
 

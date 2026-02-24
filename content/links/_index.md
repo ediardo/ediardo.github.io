@@ -1,7 +1,7 @@
 +++
 menus = 'main'
 title = 'links'
-weight = 5
+weight = 6
 hideNavbar = true
 +++
 
@@ -47,11 +47,13 @@ hideNavbar = true
 </style>
 
 <div class="links-block-list">
-  <a href="https://www.linkedin.com/in/ediardo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-  <a href="https://www.inaturalist.org/people/ediardo" target="_blank" rel="noopener noreferrer">iNaturalist</a>
-  <a href="https://instagram.com/mexicanoabroad" target="_blank" rel="noopener noreferrer">Instagram</a>
-  <a href="https://www.ediardo.com/">Website</a>
-  <a href="https://docs.google.com/spreadsheets/d/1lIKJ3nrOnS2XJ8arccfyRozKFLxt3k3sQXZ4NlXTQUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Photography Gear I own</a>
+  <a href="/photos" target="_blank" rel="noopener noreferrer">More photos 🔎</a>
+<a href="https://docs.google.com/spreadsheets/d/1lIKJ3nrOnS2XJ8arccfyRozKFLxt3k3sQXZ4NlXTQUI/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Photography gear I own 📷</a>
+  <a href="https://www.inaturalist.org/people/ediardo" target="_blank" rel="noopener noreferrer">Life observations on iNaturalist 🕷️</a>
+  <a href="https://instagram.com/mexicanoabroad" target="_blank" rel="noopener noreferrer">Instagram 🖼️</a>
+  <a href="https://www.ediardo.com/">Website 🌐</a>
+  
+  <a href="https://www.linkedin.com/in/ediardo" target="_blank" rel="noopener noreferrer">LinkedIn 💻</a>
 </div>
 
 <div id="inat"></div>
