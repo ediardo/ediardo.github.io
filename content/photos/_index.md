@@ -74,5 +74,8 @@ main {
   max-width: none !important;
   width: 100%;
 }
+a {
+  box-shadow: none !important;
+}
 </style>
 

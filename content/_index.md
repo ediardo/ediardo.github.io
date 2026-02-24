@@ -9,7 +9,7 @@
   </p>
 
   <p style="text-align: justify; line-height: 2;">
-    I was born in <a href="https://en.wikipedia.org/wiki/Mazatl%C3%A1n" target="_blank">Mazatlán, México</a> and now live in <a href="https://en.wikipedia.org/wiki/Petaluma,_California" target="_blank">Petaluma, California</a>, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>. <a href="/photo+video">Photography grew naturally from that experience</a>.
+    I was born in <a href="https://en.wikipedia.org/wiki/Mazatl%C3%A1n" target="_blank">Mazatlán, México</a> and now live in <a href="https://en.wikipedia.org/wiki/Petaluma,_California" target="_blank">Petaluma, California</a>, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>. <a href="/photos">Photography grew naturally from that experience</a>.
   </p>
 
   <p style="text-align: justify; line-height: 2;">
