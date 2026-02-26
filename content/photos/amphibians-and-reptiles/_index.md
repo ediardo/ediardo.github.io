@@ -1,5 +1,5 @@
 +++
-title = 'Amphibians and reptiles'
+title = 'amphibians and reptiles'
 weight = 1
 +++
 

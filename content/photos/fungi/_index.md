@@ -1,5 +1,5 @@
 +++
-title = 'Fungi'
+title = 'fungi'
 weight = 3
 +++
 
