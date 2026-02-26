@@ -1,5 +1,5 @@
 <div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
-{{< carousel images="photos/landscapes/IMG_0126-3.jpg, photos/insects/IMG_0266-6.jpg, photos/landscapes/IMG_0033.jpg, photos/insects/IMG_0568-2.jpg, photos/birds/IMG_0230-2.jpg, photos/insects/IMG_0266-7.jpg, photos/plants/IMG_3710.jpg,  photos/insects/IMG_0011.jpg" >}}
+{{< carousel images="photos/landscapes/IMG_0126.jpg, photos/insects/IMG_0266-6.jpg, photos/landscapes/IMG_0033.jpg, photos/insects/IMG_0568-2.jpg, photos/birds/IMG_0230-2.jpg, photos/insects/IMG_0266-7.jpg, photos/plants/IMG_3710.jpg,  photos/insects/IMG_0011.jpg" >}}
   <h3 style="margin: 1em 0; line-height: 1.5;">
     I am Edi, a software engineer and photographer building  <a href="https://www.linkacam.com" target="_blank">tools for nature photographers</a>
   </h3>
