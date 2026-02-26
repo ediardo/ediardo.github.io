@@ -6,23 +6,23 @@
   </url><url>
     <loc>http://localhost:1313/photos/amphibians-and-reptiles/</loc>
   </url><url>
+    <loc>http://localhost:1313/photos/</loc>
+  </url><url>
     <loc>http://localhost:1313/resume/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/birds/</loc>
   </url><url>
-    <loc>http://localhost:1313/skunkworks/</loc>
+    <loc>http://localhost:1313/projects/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/fungi/</loc>
-  </url><url>
-    <loc>http://localhost:1313/photos/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/insects/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/landscapes/</loc>
   </url><url>
-    <loc>http://localhost:1313/links/</loc>
-  </url><url>
     <loc>http://localhost:1313/reads/</loc>
+  </url><url>
+    <loc>http://localhost:1313/links/</loc>
   </url><url>
     <loc>http://localhost:1313/photos/mammals/</loc>
   </url><url>
@@ -33,6 +33,8 @@
     <loc>http://localhost:1313/photos/arachnids/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/about/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>

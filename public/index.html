@@ -110,6 +110,11 @@
                 </a>
             </li>
             <li>
+                <a href="http://localhost:1313/about/" title="about">
+                    <span>about</span>
+                </a>
+            </li>
+            <li>
                 <a href="http://localhost:1313/photos/" title="photos">
                     <span>photos</span>
                 </a>
@@ -120,8 +125,8 @@
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/skunkworks/" title="skunkworks">
-                    <span>skunkworks</span>
+                <a href="http://localhost:1313/projects/" title="projects">
+                    <span>projects</span>
                 </a>
             </li>
             <li>
@@ -139,25 +144,123 @@
 </header>
 <main class="main"> 
 <div class="post-content"><div style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
-  <img src="/me.jpeg" alt="me" width="100" height="100" style="border-radius: 0; object-fit: cover;" />
+<div class="carousel"><div class="carousel-slide active">
+    <img src="/photos/landscapes/IMG_0126-3_hu_a2fddf975b6a2484.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><div class="carousel-slide">
+    <img src="/photos/insects/IMG_0266-6_hu_f08b61d3f897c365.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><div class="carousel-slide">
+    <img src="/photos/insects/IMG_0568-2_hu_67b05b2ad223408e.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><div class="carousel-slide">
+    <img src="/photos/birds/IMG_0230-2_hu_2c7b1643036d49c.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><div class="carousel-slide">
+    <img src="/photos/insects/IMG_0266-7_hu_53d978c0ce1a3c79.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><div class="carousel-slide">
+    <img src="/photos/plants/IMG_3710_hu_187d2b21b98d894c.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><div class="carousel-slide">
+    <img src="/photos/insects/IMG_0011_hu_7062369e82f87833.jpg" width="1600" height="1067" alt="" loading="lazy" class="carousel-img">
+  </div><button class="carousel-btn carousel-prev" aria-label="Previous">&#10094;</button>
+  <button class="carousel-btn carousel-next" aria-label="Next">&#10095;</button>
+  <div class="carousel-dots"></div>
+</div>
+<style>
+  .carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+  }
+  .carousel-slide.active {
+    position: relative;
+    opacity: 1;
+  }
+  .carousel-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    z-index: 10;
+  }
+  .carousel-prev { left: 0.5rem; }
+  .carousel-next { right: 0.5rem; }
+  .carousel-btn:hover { background: rgba(0,0,0,0.7); }
+  .carousel-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border: none;
+  }
+  .carousel-dot.active { background: #fff; }
+</style>
+<script>
+(function() {
+  var slides = document.querySelectorAll('.carousel-slide');
+  var dotsContainer = document.querySelector('.carousel-dots');
+  var prevBtn = document.querySelector('.carousel-prev');
+  var nextBtn = document.querySelector('.carousel-next');
+  var current = 0;
+  var total = slides.length;
+  var timer = null;
+
+  for (var i = 0; i < total; i++) {
+    (function(idx) {
+      var dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+      dot.addEventListener('click', function() { goTo(idx, true); });
+      dotsContainer.appendChild(dot);
+    })(i);
+  }
+  var dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+  function goTo(idx, resetTimer) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + total) % total;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    if (resetTimer) {
+      clearInterval(timer);
+      timer = setInterval(function() { goTo(current + 1, false); }, 5000);
+    }
+  }
+
+  prevBtn.addEventListener('click', function() { goTo(current - 1, true); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1, true); });
+
+  timer = setInterval(function() { goTo(current + 1, false); }, 5000);
+})();
+</script>
+
   <h3 style="margin: 1em 0; line-height: 1.5;">
     I am Edi, a software engineer and photographer building  <a href="https://www.linkacam.com" target="_blank">tools for nature photographers</a>
   </h3>
-  <p style="text-align: justify; line-height: 2;">
-    A little about me: <strong>I'm an engineer by trade who's been hacking with computers since the late ’90s.</strong> I created this website to share my story, photos, and my projects.
-  </p>
-  <p style="text-align: justify; line-height: 2;">
-    I was born in <a href="https://en.wikipedia.org/wiki/Mazatl%C3%A1n" target="_blank">Mazatlán, México</a> and now live in <a href="https://en.wikipedia.org/wiki/Petaluma,_California" target="_blank">Petaluma, California</a>, after years of moving across the country for new opportunities. Since arriving in the USA in 2016, <strong>I’ve become a big fan of hiking, camping, and exploring nature</strong>. <a href="/photos">Photography grew naturally from that experience</a>.
-  </p>
-  <p style="text-align: justify; line-height: 2;">
-    <strong><a href="/resume">I can program, build products, and talk to users.</a></strong> The boldest choice I've made in my career is founding a startup, where I got to learn a lot about the value of solving problems for people.
-  </p>
-  <p style="text-align: justify; line-height: 2;">
-    <strong><a href="/resume">Most of the code I write today is in TypeScript and Python</a></strong>. I have solid experience as a full-stack developer, have been a mentor to junior devs, a hackathon winner, cloud operator, and overall, a sparker of new projects.</strong> On the machine learning side, I work with different model architectures and modalities both locally and in the cloud.
-  </p>
-  <p style="text-align: justify; line-height: 2;">
-    Today, <a href="https://www.linkacam.com" target="_blank">I'm building Linkacam</a>, a tool that helps nature photographers spend more time outdoors and less time in front of their computer.
-  </p>
 <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; width: 100%; text-align: left;">
   <h3 style="margin: 0;">Photos</h3>
   <a href="/photos" style="margin-left: auto;">All Photos</a>
