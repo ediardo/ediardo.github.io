@@ -169,7 +169,6 @@
       var index = triggers.indexOf(trigger);
       open(index);
     }
-    if (e.target === overlay || e.target === inner) close();
   });
 
   closeBtn.addEventListener('click', close);
@@ -187,11 +186,11 @@
   var touchEndX = 0;
   var touchThreshold = 50;
 
-  inner.addEventListener('touchstart', function(e) {
+  overlay.addEventListener('touchstart', function(e) {
     touchStartX = e.changedTouches[0].screenX;
   }, { passive: true });
 
-  inner.addEventListener('touchend', function(e) {
+  overlay.addEventListener('touchend', function(e) {
     touchEndX = e.changedTouches[0].screenX;
     var diff = touchEndX - touchStartX;
     if (Math.abs(diff) > touchThreshold) {
