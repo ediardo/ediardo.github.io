@@ -1,5 +1,8 @@
 <div id="photos-overlay" class="photos-overlay" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
   <button type="button" class="photos-overlay-close" aria-label="Close">&times;</button>
+  <button type="button" class="photos-overlay-prev" aria-label="Previous image">&#10094;</button>
+  <button type="button" class="photos-overlay-next" aria-label="Next image">&#10095;</button>
+  <a class="photos-overlay-download" aria-label="Download image" download>&#8681; Download</a>
   <div class="photos-overlay-inner">
     <img src="" alt="" />
   </div>
@@ -33,6 +36,8 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .photos-overlay-close {
   position: absolute;
@@ -50,38 +55,149 @@
   border-radius: 4px;
 }
 .photos-overlay-close:hover { background: rgba(255, 255, 255, 0.25); }
+.photos-overlay-prev,
+.photos-overlay-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 10;
+}
+.photos-overlay-prev { left: 1rem; }
+.photos-overlay-next { right: 1rem; }
+.photos-overlay-prev:hover,
+.photos-overlay-next:hover { background: rgba(255, 255, 255, 0.25); }
+.photos-overlay-download {
+  position: absolute;
+  top: 1rem;
+  right: 4rem;
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.photos-overlay-download:hover { background: rgba(255, 255, 255, 0.25); }
+@media (max-width: 768px) {
+  .photos-overlay-prev,
+  .photos-overlay-next {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
+  .photos-overlay-prev { left: 0.5rem; }
+  .photos-overlay-next { right: 0.5rem; }
+}
 </style>
 
 <script>
 (function() {
   var overlay = document.getElementById('photos-overlay');
   if (!overlay) return;
-  var img = overlay.querySelector('img');
+  var img = overlay.querySelector('.photos-overlay-inner img');
   var inner = overlay.querySelector('.photos-overlay-inner');
   var closeBtn = overlay.querySelector('.photos-overlay-close');
+  var prevBtn = overlay.querySelector('.photos-overlay-prev');
+  var nextBtn = overlay.querySelector('.photos-overlay-next');
+  var downloadBtn = overlay.querySelector('.photos-overlay-download');
 
-  function open(src, alt) {
+  var triggers = [];
+  var currentIndex = -1;
+
+  function collectTriggers() {
+    triggers = Array.prototype.slice.call(document.querySelectorAll('.gallery-photo-trigger'));
+  }
+
+  function open(index) {
+    if (index < 0 || index >= triggers.length) return;
+    currentIndex = index;
+    var trigger = triggers[index];
+    var src = trigger.getAttribute('data-full');
+    var alt = (trigger.querySelector('img') && trigger.querySelector('img').alt) || '';
     img.src = src;
-    img.alt = alt || '';
+    img.alt = alt;
+    downloadBtn.href = src;
+    downloadBtn.download = src.split('/').pop();
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
+    updateNavButtons();
   }
+
   function close() {
     overlay.hidden = true;
     document.body.style.overflow = '';
+    currentIndex = -1;
+  }
+
+  function prev() {
+    if (currentIndex > 0) open(currentIndex - 1);
+  }
+
+  function next() {
+    if (currentIndex < triggers.length - 1) open(currentIndex + 1);
+  }
+
+  function updateNavButtons() {
+    prevBtn.style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
+    nextBtn.style.visibility = currentIndex < triggers.length - 1 ? 'visible' : 'hidden';
   }
 
   document.addEventListener('click', function(e) {
     var trigger = e.target.closest('.gallery-photo-trigger');
     if (trigger) {
       e.preventDefault();
-      open(trigger.getAttribute('data-full'), (trigger.querySelector('img') && trigger.querySelector('img').alt) || '');
+      collectTriggers();
+      var index = triggers.indexOf(trigger);
+      open(index);
     }
     if (e.target === overlay || e.target === inner) close();
   });
+
   closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function(e) { e.stopPropagation(); prev(); });
+  nextBtn.addEventListener('click', function(e) { e.stopPropagation(); next(); });
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && !overlay.hidden) close();
+    if (overlay.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
   });
+
+  var touchStartX = 0;
+  var touchEndX = 0;
+  var touchThreshold = 50;
+
+  inner.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  inner.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > touchThreshold) {
+      if (diff > 0) prev();
+      else next();
+    }
+  }, { passive: true });
 })();
 </script>

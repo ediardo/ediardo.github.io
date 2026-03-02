@@ -19,6 +19,30 @@
 @media (max-width: 768px) {
   .masonry-grid { column-count: 2; }
 }
+
+.sequential-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+.sequential-grid .masonry-item {
+  break-inside: unset;
+  margin-bottom: 0;
+  page-break-inside: unset;
+}
+.sequential-grid .masonry-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+@media (max-width: 768px) {
+  .sequential-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 main {
   max-width: none !important;
   width: 100%;
