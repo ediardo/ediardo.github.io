@@ -357,5 +357,60 @@
     }
     updateTransform();
   }, { passive: false });
+
+  var isMousePanning = false;
+  var mouseStartX = 0;
+  var mouseStartY = 0;
+  var mouseInitialTranslateX = 0;
+  var mouseInitialTranslateY = 0;
+
+  inner.addEventListener('mousedown', function(e) {
+    if (scale > 1 && e.button === 0) {
+      isMousePanning = true;
+      mouseStartX = e.clientX;
+      mouseStartY = e.clientY;
+      mouseInitialTranslateX = translateX;
+      mouseInitialTranslateY = translateY;
+      img.classList.add('zooming');
+      inner.style.cursor = 'grabbing';
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isMousePanning) return;
+    var dx = e.clientX - mouseStartX;
+    var dy = e.clientY - mouseStartY;
+    translateX = mouseInitialTranslateX + dx;
+    translateY = mouseInitialTranslateY + dy;
+    updateTransform();
+  });
+
+  document.addEventListener('mouseup', function(e) {
+    if (isMousePanning) {
+      isMousePanning = false;
+      img.classList.remove('zooming');
+      inner.style.cursor = '';
+    }
+  });
+
+  inner.style.cursor = 'default';
+  var updateCursor = function() {
+    if (!overlay.hidden && scale > 1) {
+      inner.style.cursor = 'grab';
+    } else {
+      inner.style.cursor = 'default';
+    }
+  };
+  var originalOpen = open;
+  open = function(index) {
+    originalOpen(index);
+    updateCursor();
+  };
+  var originalResetZoom = resetZoom;
+  resetZoom = function() {
+    originalResetZoom();
+    updateCursor();
+  };
 })();
 </script>

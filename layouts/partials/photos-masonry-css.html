@@ -2,11 +2,11 @@
 .masonry-grid {
   width: 100%;
   column-count: 3;
-  column-gap: 0.75rem;
+  column-gap: 0.25rem;
 }
 .masonry-item {
   break-inside: avoid;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
   page-break-inside: avoid;
 }
 .masonry-item img {
@@ -15,6 +15,7 @@
   height: auto;
   margin: 0 !important;
   border-radius: 0 !important;
+  cursor: zoom-in;
 }
 @media (max-width: 768px) {
   .masonry-grid { column-count: 2; }
@@ -23,7 +24,7 @@
 .sequential-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  gap: 0.25rem;
   width: 100%;
 }
 .sequential-grid .masonry-item {
@@ -38,6 +39,7 @@
   object-fit: cover;
   margin: 0 !important;
   border-radius: 0 !important;
+  cursor: zoom-in;
 }
 @media (max-width: 768px) {
   .sequential-grid { grid-template-columns: repeat(2, 1fr); }
