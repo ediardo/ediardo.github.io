@@ -183,18 +183,38 @@
   });
 
   var touchStartX = 0;
-  var touchEndX = 0;
-  var touchThreshold = 50;
+  var touchStartY = 0;
+  var touchStartTime = 0;
+  var isSingleTouch = false;
+  var touchThreshold = 80;
+  var maxVerticalDrift = 100;
+  var maxSwipeTime = 400;
 
   overlay.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
+    isSingleTouch = e.touches.length === 1;
+    if (isSingleTouch) {
+      touchStartX = e.touches[0].screenX;
+      touchStartY = e.touches[0].screenY;
+      touchStartTime = Date.now();
+    }
+  }, { passive: true });
+
+  overlay.addEventListener('touchmove', function(e) {
+    if (e.touches.length > 1) {
+      isSingleTouch = false;
+    }
   }, { passive: true });
 
   overlay.addEventListener('touchend', function(e) {
-    touchEndX = e.changedTouches[0].screenX;
-    var diff = touchEndX - touchStartX;
-    if (Math.abs(diff) > touchThreshold) {
-      if (diff > 0) prev();
+    if (!isSingleTouch) return;
+    var touchEndX = e.changedTouches[0].screenX;
+    var touchEndY = e.changedTouches[0].screenY;
+    var touchEndTime = Date.now();
+    var diffX = touchEndX - touchStartX;
+    var diffY = Math.abs(touchEndY - touchStartY);
+    var elapsed = touchEndTime - touchStartTime;
+    if (Math.abs(diffX) > touchThreshold && diffY < maxVerticalDrift && elapsed < maxSwipeTime) {
+      if (diffX > 0) prev();
       else next();
     }
   }, { passive: true });
