@@ -127,6 +127,10 @@
     triggers = Array.prototype.slice.call(document.querySelectorAll('.gallery-photo-trigger'));
   }
 
+  function preventScroll(e) {
+    e.preventDefault();
+  }
+
   function open(index) {
     if (index < 0 || index >= triggers.length) return;
     currentIndex = index;
@@ -139,12 +143,23 @@
     downloadBtn.download = src.split('/').pop();
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = '-' + window.scrollY + 'px';
+    document.addEventListener('touchmove', preventScroll, { passive: false });
     updateNavButtons();
   }
 
+  var savedScrollY = 0;
   function close() {
+    var scrollY = document.body.style.top;
     overlay.hidden = true;
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    document.removeEventListener('touchmove', preventScroll);
     currentIndex = -1;
   }
 
