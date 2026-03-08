@@ -1,9 +1,18 @@
 <div id="photos-overlay" class="photos-overlay" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
-  <button type="button" class="photos-overlay-close" aria-label="Close">&times;</button>
+  <header class="photos-overlay-bar">
+    <span id="photos-overlay-title" class="photos-overlay-title"></span>
+    <div class="photos-overlay-bar-actions">
+      <a class="photos-overlay-download" aria-label="Download image" download>&#8681; Download</a>
+      <button type="button" class="photos-overlay-close" aria-label="Close">&times;</button>
+    </div>
+  </header>
   <button type="button" class="photos-overlay-prev" aria-label="Previous image">&#10094;</button>
   <button type="button" class="photos-overlay-next" aria-label="Next image">&#10095;</button>
-  <a class="photos-overlay-download" aria-label="Download image" download>&#8681; Download</a>
   <div class="photos-overlay-inner">
+    <div id="photos-overlay-loading" class="photos-overlay-loading" aria-hidden="true">
+      <span class="photos-overlay-spinner"></span>
+      <span class="photos-overlay-loading-text">Loading image…</span>
+    </div>
     <img src="" alt="" />
   </div>
 </div>
@@ -25,9 +34,41 @@
   overflow: hidden;
 }
 .photos-overlay[hidden] { display: none !important; }
+.photos-overlay-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.75rem;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem 0 1rem;
+  z-index: 20;
+  flex-shrink: 0;
+}
+.photos-overlay-title {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 10rem);
+}
+.photos-overlay-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
 .photos-overlay-inner {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 2.75rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,23 +89,52 @@
 .photos-overlay-inner img.zooming {
   transition: none;
 }
-.photos-overlay-close {
+.photos-overlay-loading {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+.photos-overlay-loading.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.photos-overlay-spinner {
   width: 2.5rem;
   height: 2.5rem;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: photos-overlay-spin 0.8s linear infinite;
+}
+.photos-overlay-loading-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+@keyframes photos-overlay-spin {
+  to { transform: rotate(360deg); }
+}
+.photos-overlay-close {
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0;
   border: none;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
   border-radius: 4px;
-  z-index: 20;
 }
-.photos-overlay-close:hover { background: rgba(255, 255, 255, 0.25); }
+.photos-overlay-close:hover { background: rgba(255, 255, 255, 0.22); }
 .photos-overlay-prev,
 .photos-overlay-next {
   position: absolute;
@@ -87,16 +157,12 @@
 .photos-overlay-prev:hover,
 .photos-overlay-next:hover { background: rgba(255, 255, 255, 0.25); }
 .photos-overlay-download {
-  position: absolute;
-  top: 1rem;
-  right: 4rem;
-  height: 2.5rem;
-  padding: 0 0.75rem;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
+  height: 2.25rem;
+  padding: 0 0.6rem;
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
-  font-size: 1rem;
-  line-height: 2.5rem;
+  font-size: 0.875rem;
+  line-height: 2.25rem;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -105,9 +171,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  z-index: 20;
 }
-.photos-overlay-download:hover { background: rgba(255, 255, 255, 0.25); }
+.photos-overlay-download:hover { background: rgba(255, 255, 255, 0.22); }
 @media (max-width: 768px) {
   .photos-overlay-prev,
   .photos-overlay-next {
@@ -126,10 +191,24 @@
   if (!overlay) return;
   var img = overlay.querySelector('.photos-overlay-inner img');
   var inner = overlay.querySelector('.photos-overlay-inner');
+  var loadingEl = document.getElementById('photos-overlay-loading');
   var closeBtn = overlay.querySelector('.photos-overlay-close');
   var prevBtn = overlay.querySelector('.photos-overlay-prev');
   var nextBtn = overlay.querySelector('.photos-overlay-next');
   var downloadBtn = overlay.querySelector('.photos-overlay-download');
+
+  function showLoading() {
+    if (loadingEl) {
+      loadingEl.classList.add('visible');
+      loadingEl.setAttribute('aria-hidden', 'false');
+    }
+  }
+  function hideLoading() {
+    if (loadingEl) {
+      loadingEl.classList.remove('visible');
+      loadingEl.setAttribute('aria-hidden', 'true');
+    }
+  }
 
   var triggers = [];
   var currentIndex = -1;
@@ -163,24 +242,47 @@
     img.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
   }
 
+  function onImageLoad() {
+    hideLoading();
+  }
+  function onImageError() {
+    hideLoading();
+  }
+
+  var titleEl = document.getElementById('photos-overlay-title');
+  function setOverlayTitle() {
+    var h1 = document.querySelector('main h1, .content h1, h1');
+    if (titleEl) {
+      titleEl.textContent = h1 ? h1.textContent.trim() : '';
+    }
+  }
+
   function open(index) {
     if (index < 0 || index >= triggers.length) return;
     currentIndex = index;
     var trigger = triggers[index];
     var src = trigger.getAttribute('data-full');
     var alt = (trigger.querySelector('img') && trigger.querySelector('img').alt) || '';
-    img.src = src;
-    img.alt = alt;
-    downloadBtn.href = src;
-    downloadBtn.download = src.split('/').pop();
     resetZoom();
+    setOverlayTitle();
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
     document.body.style.top = '-' + window.scrollY + 'px';
     updateNavButtons();
+    showLoading();
+    img.alt = alt;
+    downloadBtn.href = src;
+    downloadBtn.download = src.split('/').pop();
+    img.src = src;
+    if (img.complete) {
+      hideLoading();
+    }
   }
+
+  img.addEventListener('load', onImageLoad);
+  img.addEventListener('error', onImageError);
 
   function close() {
     var scrollY = document.body.style.top;
@@ -228,6 +330,22 @@
     if (e.key === 'Escape') close();
     if (e.key === 'ArrowLeft') prev();
     if (e.key === 'ArrowRight') next();
+  });
+
+  inner.addEventListener('dblclick', function(e) {
+    if (scale > 1) {
+      resetZoom();
+    } else {
+      var rect = inner.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      scale = 2.5;
+      translateX = -x * 0.6;
+      translateY = -y * 0.6;
+      img.classList.add('zooming');
+      updateTransform();
+      if (typeof updateCursor === 'function') updateCursor();
+    }
   });
 
   function getDistance(touches) {
