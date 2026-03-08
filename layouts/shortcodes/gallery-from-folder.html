@@ -1,0 +1,21 @@
+{{- $folder := .Get "folder" | default "" -}}
+{{- $size := .Get "size" | default "800x" -}}
+{{- $class := .Get "class" | default "sequential-grid" -}}
+{{- if $folder -}}
+  {{- $pattern := printf "%s/*.jpg" (strings.TrimSuffix "/" $folder) -}}
+  {{- $images := resources.Match $pattern -}}
+  {{- $images = sort $images "Name" -}}
+  <div class="{{ $class }}">
+    {{- range $images -}}
+      {{- $fullURL := .RelPermalink -}}
+      {{- $thumb := .Resize $size -}}
+      <div class="masonry-item">
+        <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $fullURL }}" title="View full size">
+          <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy">
+        </span>
+      </div>
+    {{- end -}}
+  </div>
+{{- else -}}
+  {{- warnf "gallery-from-folder: missing folder parameter" -}}
+{{- end -}}
