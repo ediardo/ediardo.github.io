@@ -2,7 +2,15 @@
   <header class="photos-overlay-bar">
     <span id="photos-overlay-title" class="photos-overlay-title"></span>
     <div class="photos-overlay-bar-actions">
-      <a class="photos-overlay-download" aria-label="Download image" download>&#8681; Download</a>
+      <a class="photos-overlay-download" id="photos-overlay-download-btn" aria-label="Download image" download>&#8681; Download</a>
+      <div class="photos-overlay-share-wrap">
+        <button type="button" class="photos-overlay-share" aria-label="Share" aria-haspopup="true" aria-expanded="false">Share</button>
+        <div id="photos-overlay-share-popup" class="photos-overlay-share-popup" role="menu" hidden>
+          <a class="photos-overlay-share-option" href="#" target="_blank" rel="noopener" data-share="whatsapp" role="menuitem">WhatsApp</a>
+          <a class="photos-overlay-share-option" href="#" target="_blank" rel="noopener" data-share="facebook" role="menuitem">Facebook</a>
+          <button type="button" class="photos-overlay-share-option" data-share="download" role="menuitem">Download</button>
+        </div>
+      </div>
       <button type="button" class="photos-overlay-close" aria-label="Close">&times;</button>
     </div>
   </header>
@@ -173,6 +181,46 @@
   gap: 0.25rem;
 }
 .photos-overlay-download:hover { background: rgba(255, 255, 255, 0.22); }
+.photos-overlay-share-wrap { position: relative; }
+.photos-overlay-share {
+  height: 2.25rem;
+  padding: 0 0.6rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.photos-overlay-share:hover { background: rgba(255, 255, 255, 0.22); }
+.photos-overlay-share-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.25rem;
+  min-width: 8rem;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 0.25rem 0;
+  z-index: 30;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.photos-overlay-share-popup[hidden] { display: none !important; }
+.photos-overlay-share-option {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-size: 0.875rem;
+  text-align: left;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.photos-overlay-share-option:hover { background: rgba(255, 255, 255, 0.15); }
 @media (max-width: 768px) {
   .photos-overlay-prev,
   .photos-overlay-next {
@@ -195,7 +243,9 @@
   var closeBtn = overlay.querySelector('.photos-overlay-close');
   var prevBtn = overlay.querySelector('.photos-overlay-prev');
   var nextBtn = overlay.querySelector('.photos-overlay-next');
-  var downloadBtn = overlay.querySelector('.photos-overlay-download');
+  var downloadBtn = document.getElementById('photos-overlay-download-btn');
+  var shareBtn = overlay.querySelector('.photos-overlay-share');
+  var sharePopup = document.getElementById('photos-overlay-share-popup');
 
   function showLoading() {
     if (loadingEl) {
@@ -242,11 +292,26 @@
     img.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
   }
 
+  var currentImageSrc = '';
+
+  function pathOnly(url) {
+    if (!url) return '';
+    return url.replace(/^https?:\/\/[^/]+/, '').split('?')[0];
+  }
+
   function onImageLoad() {
+    var loadedPath = pathOnly(img.currentSrc || img.src);
+    var expectedPath = pathOnly(currentImageSrc);
+    if (loadedPath !== expectedPath) return;
     hideLoading();
+    preloadAdjacent();
   }
   function onImageError() {
+    var loadedPath = pathOnly(img.currentSrc || img.src);
+    var expectedPath = pathOnly(currentImageSrc);
+    if (loadedPath !== expectedPath) return;
     hideLoading();
+    preloadAdjacent();
   }
 
   var titleEl = document.getElementById('photos-overlay-title');
@@ -257,12 +322,50 @@
     }
   }
 
+  function getPreloadAhead() {
+    if (!triggers.length) return 2;
+    var container = triggers[0].closest('[data-preload-ahead]');
+    if (!container) return 2;
+    var n = parseInt(container.getAttribute('data-preload-ahead'), 10);
+    return isNaN(n) || n < 0 ? 2 : n;
+  }
+
+  var preloadRunId = 0;
+
+  function preloadAdjacent() {
+    preloadRunId++;
+    var thisRun = preloadRunId;
+    var n = getPreloadAhead();
+    var queue = [];
+    for (var d = 1; d <= n; d++) {
+      if (currentIndex + d < triggers.length) {
+        var src = triggers[currentIndex + d].getAttribute('data-full');
+        if (src) queue.push(src);
+      }
+      if (currentIndex - d >= 0) {
+        src = triggers[currentIndex - d].getAttribute('data-full');
+        if (src) queue.push(src);
+      }
+    }
+    function loadNext() {
+      if (thisRun !== preloadRunId || !queue.length) return;
+      var src = queue.shift();
+      var img = new Image();
+      img.onload = loadNext;
+      img.onerror = loadNext;
+      img.src = src;
+    }
+    loadNext();
+  }
+
   function open(index) {
     if (index < 0 || index >= triggers.length) return;
     currentIndex = index;
     var trigger = triggers[index];
     var src = trigger.getAttribute('data-full');
     var alt = (trigger.querySelector('img') && trigger.querySelector('img').alt) || '';
+    currentImageSrc = src;
+    img.removeAttribute('src');
     resetZoom();
     setOverlayTitle();
     overlay.hidden = false;
@@ -271,13 +374,66 @@
     document.body.style.width = '100%';
     document.body.style.top = '-' + window.scrollY + 'px';
     updateNavButtons();
-    showLoading();
     img.alt = alt;
     downloadBtn.href = src;
     downloadBtn.download = src.split('/').pop();
     img.src = src;
     if (img.complete) {
       hideLoading();
+      preloadAdjacent();
+    } else {
+      showLoading();
+    }
+    if (sharePopup) { sharePopup.hidden = true; if (shareBtn) shareBtn.setAttribute('aria-expanded', 'false'); }
+    updateUrlForImage(src);
+  }
+
+  function imageFilenameFromSrc(src) {
+    if (!src) return '';
+    var parts = src.split('/');
+    return parts[parts.length - 1] || '';
+  }
+
+  function updateUrlForImage(src) {
+    var filename = imageFilenameFromSrc(src);
+    if (!filename) return;
+    var base = document.location.pathname.replace(/\/$/, '');
+    base = base.replace(/\/[^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP)$/i, '') || '/';
+    var newUrl = (base === '/' ? '' : base) + '/' + encodeURIComponent(filename);
+    if (document.location.pathname !== newUrl) {
+      history.pushState({ galleryImage: filename }, '', newUrl);
+    }
+  }
+
+  function clearUrlImage() {
+    var pathname = document.location.pathname;
+    if (pathname.match(/\/([^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP))$/i)) {
+      var galleryPath = pathname.replace(/\/[^/]+$/, '') || '/';
+      if (!/\/$/.test(galleryPath)) galleryPath += '/';
+      history.replaceState(null, '', galleryPath);
+    }
+  }
+
+  function filenameFromUrl() {
+    var pathname = document.location.pathname;
+    var pathMatch = pathname.match(/\/([^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP))$/i);
+    if (pathMatch) return decodeURIComponent(pathMatch[1]);
+    var hash = document.location.hash.slice(1);
+    if (hash) return decodeURIComponent(hash);
+    return null;
+  }
+
+  function openImageFromUrl() {
+    var filename = filenameFromUrl();
+    if (!filename) return;
+    collectTriggers();
+    if (!triggers.length) return;
+    for (var i = 0; i < triggers.length; i++) {
+      var src = triggers[i].getAttribute('data-full');
+      if (src && imageFilenameFromSrc(src) === filename) {
+        open(i);
+        return;
+      }
     }
   }
 
@@ -294,6 +450,22 @@
     window.scrollTo(0, parseInt(scrollY || '0') * -1);
     resetZoom();
     currentIndex = -1;
+    clearUrlImage();
+  }
+
+  window.addEventListener('popstate', function() {
+    var filename = filenameFromUrl();
+    if (filename) {
+      openImageFromUrl();
+    } else if (!overlay.hidden) {
+      close();
+    }
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', openImageFromUrl);
+  } else {
+    openImageFromUrl();
   }
 
   function prev() {
@@ -324,6 +496,37 @@
   closeBtn.addEventListener('click', close);
   prevBtn.addEventListener('click', function(e) { e.stopPropagation(); prev(); });
   nextBtn.addEventListener('click', function(e) { e.stopPropagation(); next(); });
+
+  if (shareBtn && sharePopup) {
+    shareBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = !sharePopup.hidden;
+      sharePopup.hidden = isOpen;
+      shareBtn.setAttribute('aria-expanded', !isOpen);
+    });
+    sharePopup.querySelectorAll('.photos-overlay-share-option').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        var action = el.getAttribute('data-share');
+        var imgSrc = img.src || '';
+        if (action === 'whatsapp') {
+          window.open('https://wa.me/?text=' + encodeURIComponent(imgSrc), '_blank', 'noopener');
+        } else if (action === 'facebook') {
+          window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imgSrc), '_blank', 'noopener');
+        } else if (action === 'download' && downloadBtn) {
+          downloadBtn.click();
+        }
+        sharePopup.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', function() {
+      if (!sharePopup.hidden) {
+        sharePopup.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   document.addEventListener('keydown', function(e) {
     if (overlay.hidden) return;

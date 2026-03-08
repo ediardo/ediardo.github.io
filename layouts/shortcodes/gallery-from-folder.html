@@ -1,11 +1,12 @@
 {{- $folder := .Get "folder" | default "" -}}
 {{- $size := .Get "size" | default "800x" -}}
 {{- $class := .Get "class" | default "sequential-grid" -}}
+{{- $preloadAhead := .Get "preloadAhead" | default "2" -}}
 {{- if $folder -}}
   {{- $pattern := printf "%s/*.jpg" (strings.TrimSuffix "/" $folder) -}}
   {{- $images := resources.Match $pattern -}}
   {{- $images = sort $images "Name" -}}
-  <div class="{{ $class }}">
+  <div class="{{ $class }}" data-preload-ahead="{{ $preloadAhead }}">
     {{- range $images -}}
       {{- $fullURL := .RelPermalink -}}
       {{- $thumb := .Resize $size -}}
