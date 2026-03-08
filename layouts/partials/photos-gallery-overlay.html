@@ -2,15 +2,6 @@
   <header class="photos-overlay-bar">
     <span id="photos-overlay-title" class="photos-overlay-title"></span>
     <div class="photos-overlay-bar-actions">
-      <a class="photos-overlay-download" id="photos-overlay-download-btn" aria-label="Download image" download>&#8681; Download</a>
-      <div class="photos-overlay-share-wrap">
-        <button type="button" class="photos-overlay-share" aria-label="Share" aria-haspopup="true" aria-expanded="false">Share</button>
-        <div id="photos-overlay-share-popup" class="photos-overlay-share-popup" role="menu" hidden>
-          <a class="photos-overlay-share-option" href="#" target="_blank" rel="noopener" data-share="whatsapp" role="menuitem">WhatsApp</a>
-          <a class="photos-overlay-share-option" href="#" target="_blank" rel="noopener" data-share="facebook" role="menuitem">Facebook</a>
-          <button type="button" class="photos-overlay-share-option" data-share="download" role="menuitem">Download</button>
-        </div>
-      </div>
       <button type="button" class="photos-overlay-close" aria-label="Close">&times;</button>
     </div>
   </header>
@@ -23,6 +14,19 @@
     </div>
     <img src="" alt="" />
   </div>
+  <footer class="photos-overlay-footer">
+    <div class="photos-overlay-footer-actions">
+      <a class="photos-overlay-download" id="photos-overlay-download-btn" aria-label="Download image" download>&#8681; Download</a>
+      <div class="photos-overlay-share-wrap">
+        <button type="button" class="photos-overlay-share" aria-label="Share" aria-haspopup="true" aria-expanded="false">Share</button>
+        <div id="photos-overlay-share-popup" class="photos-overlay-share-popup" role="menu" hidden>
+          <a class="photos-overlay-share-option" href="#" target="_blank" rel="noopener" data-share="whatsapp" role="menuitem">WhatsApp</a>
+          <a class="photos-overlay-share-option" href="#" target="_blank" rel="noopener" data-share="facebook" role="menuitem">Facebook</a>
+          <button type="button" class="photos-overlay-share-option" data-share="download" role="menuitem">Download</button>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
 
 <style>
@@ -63,7 +67,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: calc(100% - 10rem);
+  max-width: calc(100% - 4rem);
 }
 .photos-overlay-bar-actions {
   display: flex;
@@ -76,12 +80,32 @@
   top: 2.75rem;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   touch-action: none;
+}
+.photos-overlay-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.75rem;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  z-index: 20;
+  flex-shrink: 0;
+}
+.photos-overlay-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
 }
 .photos-overlay-inner img {
   max-width: 100%;
@@ -195,9 +219,10 @@
 .photos-overlay-share:hover { background: rgba(255, 255, 255, 0.22); }
 .photos-overlay-share-popup {
   position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 0.25rem;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.25rem;
   min-width: 8rem;
   background: rgba(0, 0, 0, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -508,11 +533,11 @@
       el.addEventListener('click', function(e) {
         e.preventDefault();
         var action = el.getAttribute('data-share');
-        var imgSrc = img.src || '';
+        var shareUrl = window.location.origin + document.location.pathname;
         if (action === 'whatsapp') {
-          window.open('https://wa.me/?text=' + encodeURIComponent(imgSrc), '_blank', 'noopener');
+          window.open('https://wa.me/?text=' + encodeURIComponent(shareUrl), '_blank', 'noopener');
         } else if (action === 'facebook') {
-          window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imgSrc), '_blank', 'noopener');
+          window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl), '_blank', 'noopener');
         } else if (action === 'download' && downloadBtn) {
           downloadBtn.click();
         }

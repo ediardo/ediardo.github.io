@@ -144,6 +144,16 @@
     </nav>
 </header>
 <main class="main">
+<script>
+(function() {
+  var path = window.location.pathname;
+  var match = path.match(/^(\/photos\/p\/[^/]+)\/([^/]+\.(jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP))$/i);
+  if (match) {
+    window.location.replace(match[1] + '/' + '#' + encodeURIComponent(match[2]));
+    return;
+  }
+})();
+</script>
 <div class="not-found">404</div>
     </main>
     
