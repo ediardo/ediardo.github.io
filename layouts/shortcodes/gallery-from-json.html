@@ -1,0 +1,48 @@
+{{- $jsonUrl := .Get "jsonUrl" | default "" -}}
+{{- $class := .Get "class" | default "sequential-grid" -}}
+{{- $preloadAhead := .Get "preloadAhead" | default "2" -}}
+{{- if $jsonUrl -}}
+<div class="{{ $class }} gallery-from-json" data-preload-ahead="{{ $preloadAhead }}" data-json-url="{{ $jsonUrl }}">
+  <noscript>Enable JavaScript to view the gallery.</noscript>
+</div>
+<script>
+(function() {
+  var container = document.currentScript.previousElementSibling;
+  if (!container || !container.classList.contains('gallery-from-json')) return;
+  var jsonUrl = container.getAttribute('data-json-url');
+  if (!jsonUrl) return;
+  fetch(jsonUrl)
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(new Error('Failed to load gallery')); })
+    .then(function(data) {
+      var base = (data.basePath || '').replace(/\/?$/, '/');
+      var photos = data.photos || [];
+      photos.forEach(function(filename) {
+        var url = base + encodeURIComponent(filename);
+        var item = document.createElement('div');
+        item.className = 'masonry-item';
+        var trigger = document.createElement('span');
+        trigger.className = 'gallery-photo-trigger';
+        trigger.setAttribute('role', 'button');
+        trigger.setAttribute('tabindex', '0');
+        trigger.setAttribute('data-full', url);
+        trigger.setAttribute('data-download', url);
+        trigger.setAttribute('title', 'View full size');
+        var img = document.createElement('img');
+        img.src = url;
+        img.alt = '';
+        img.loading = 'lazy';
+        trigger.appendChild(img);
+        item.appendChild(trigger);
+        container.appendChild(item);
+      });
+      container.querySelector('noscript') && container.querySelector('noscript').remove();
+      window.dispatchEvent(new CustomEvent('photos-gallery-ready'));
+    })
+    .catch(function() {
+      if (container) container.innerHTML = '<p class="gallery-from-json-error">Gallery could not be loaded.</p>';
+    });
+})();
+</script>
+{{- else -}}
+{{- warnf "gallery-from-json: missing jsonUrl parameter" -}}
+{{- end -}}

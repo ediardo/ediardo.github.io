@@ -63,7 +63,7 @@ weight = 1
   left: 0;
   padding: 0.5rem 0.75rem;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 500;
   z-index: 1;
 }

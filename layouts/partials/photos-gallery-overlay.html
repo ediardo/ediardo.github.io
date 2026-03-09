@@ -12,10 +12,17 @@
       <span class="photos-overlay-spinner"></span>
       <span class="photos-overlay-loading-text">Loading image…</span>
     </div>
+    <div id="photos-overlay-minimap" class="photos-overlay-minimap" aria-hidden="true" hidden>
+      <div class="photos-overlay-minimap-thumb-wrap">
+        <img class="photos-overlay-minimap-thumb" src="" alt="" />
+        <div class="photos-overlay-minimap-viewport" id="photos-overlay-minimap-viewport"></div>
+      </div>
+    </div>
     <img src="" alt="" />
   </div>
   <footer class="photos-overlay-footer">
     <div class="photos-overlay-footer-actions">
+      <button type="button" class="photos-overlay-fullsize-toggle" id="photos-overlay-fullsize-btn" aria-label="Toggle full size image" aria-pressed="false">Full size</button>
       <a class="photos-overlay-download" id="photos-overlay-download-btn" aria-label="Download image" download>&#8681; Download</a>
       <div class="photos-overlay-share-wrap">
         <button type="button" class="photos-overlay-share" aria-label="Share" aria-haspopup="true" aria-expanded="false">Share</button>
@@ -121,6 +128,37 @@
 .photos-overlay-inner img.zooming {
   transition: none;
 }
+.photos-overlay-minimap {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 15;
+  max-width: 140px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+.photos-overlay-minimap[hidden] { display: none !important; }
+.photos-overlay-minimap-thumb-wrap {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+.photos-overlay-minimap-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+.photos-overlay-minimap-viewport {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  pointer-events: none;
+}
 .photos-overlay-loading {
   position: absolute;
   inset: 0;
@@ -205,6 +243,18 @@
   gap: 0.25rem;
 }
 .photos-overlay-download:hover { background: rgba(255, 255, 255, 0.22); }
+.photos-overlay-fullsize-toggle {
+  height: 2.25rem;
+  padding: 0 0.6rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.photos-overlay-fullsize-toggle:hover { background: rgba(255, 255, 255, 0.22); }
+.photos-overlay-fullsize-toggle[aria-pressed="true"] { background: rgba(255, 255, 255, 0.28); }
 .photos-overlay-share-wrap { position: relative; }
 .photos-overlay-share {
   height: 2.25rem;
@@ -262,15 +312,29 @@
 (function() {
   var overlay = document.getElementById('photos-overlay');
   if (!overlay) return;
-  var img = overlay.querySelector('.photos-overlay-inner img');
+  var img = overlay.querySelector('.photos-overlay-inner > img');
   var inner = overlay.querySelector('.photos-overlay-inner');
   var loadingEl = document.getElementById('photos-overlay-loading');
+  var minimapEl = document.getElementById('photos-overlay-minimap');
+  var minimapThumb = overlay.querySelector('.photos-overlay-minimap-thumb');
+  var minimapViewport = document.getElementById('photos-overlay-minimap-viewport');
   var closeBtn = overlay.querySelector('.photos-overlay-close');
   var prevBtn = overlay.querySelector('.photos-overlay-prev');
   var nextBtn = overlay.querySelector('.photos-overlay-next');
   var downloadBtn = document.getElementById('photos-overlay-download-btn');
+  var fullSizeBtn = document.getElementById('photos-overlay-fullsize-btn');
   var shareBtn = overlay.querySelector('.photos-overlay-share');
   var sharePopup = document.getElementById('photos-overlay-share-popup');
+
+  var COOKIE_FULLSIZE = 'photos-viewer-full-size';
+  function getFullSizePreference() {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + COOKIE_FULLSIZE + '=([^;]*)'));
+    return m ? m[1] === '1' : false;
+  }
+  function setFullSizePreference(value) {
+    document.cookie = COOKIE_FULLSIZE + '=' + (value ? '1' : '0') + '; path=/; max-age=31536000; SameSite=Lax';
+  }
+  var useFullSize = getFullSizePreference();
 
   function showLoading() {
     if (loadingEl) {
@@ -313,8 +377,54 @@
     updateTransform();
   }
 
+  function clampTranslation() {
+    var nw = img.naturalWidth;
+    var nh = img.naturalHeight;
+    if (!nw || !nh) return;
+    var innerW = inner.clientWidth;
+    var innerH = inner.clientHeight;
+    var minX = innerW / 2 - (nw * scale) / 2;
+    var maxX = (nw * scale) / 2 - innerW / 2;
+    var minY = innerH / 2 - (nh * scale) / 2;
+    var maxY = (nh * scale) / 2 - innerH / 2;
+    if (minX > maxX) minX = maxX = 0;
+    if (minY > maxY) minY = maxY = 0;
+    translateX = Math.max(minX, Math.min(maxX, translateX));
+    translateY = Math.max(minY, Math.min(maxY, translateY));
+  }
+
   function updateTransform() {
+    clampTranslation();
     img.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
+    updateMinimap();
+  }
+
+  function updateMinimap() {
+    if (!minimapEl || !minimapViewport || !minimapThumb) return;
+    if (scale <= 1) {
+      minimapEl.hidden = true;
+      minimapEl.setAttribute('aria-hidden', 'true');
+      return;
+    }
+    var layoutW = img.offsetWidth;
+    var layoutH = img.offsetHeight;
+    if (!layoutW || !layoutH) return;
+    var innerW = inner.clientWidth;
+    var innerH = inner.clientHeight;
+    var visibleLayoutLeft = layoutW / 2 - (innerW / 2 + translateX) / scale;
+    var visibleLayoutTop = layoutH / 2 - (innerH / 2 + translateY) / scale;
+    var visibleLayoutW = innerW / scale;
+    var visibleLayoutH = innerH / scale;
+    var leftFrac = Math.max(0, Math.min(1, visibleLayoutLeft / layoutW));
+    var topFrac = Math.max(0, Math.min(1, visibleLayoutTop / layoutH));
+    var widthFrac = Math.max(0, Math.min(1, visibleLayoutW / layoutW));
+    var heightFrac = Math.max(0, Math.min(1, visibleLayoutH / layoutH));
+    minimapEl.hidden = false;
+    minimapEl.setAttribute('aria-hidden', 'false');
+    minimapViewport.style.left = (leftFrac * 100) + '%';
+    minimapViewport.style.top = (topFrac * 100) + '%';
+    minimapViewport.style.width = (widthFrac * 100) + '%';
+    minimapViewport.style.height = (heightFrac * 100) + '%';
   }
 
   var currentImageSrc = '';
@@ -357,6 +467,18 @@
 
   var preloadRunId = 0;
 
+  function getViewerSrc(trigger) {
+    if (!trigger) return '';
+    return useFullSize ? (trigger.getAttribute('data-download') || trigger.getAttribute('data-full')) : trigger.getAttribute('data-full');
+  }
+
+  function updateFullSizeButton() {
+    if (fullSizeBtn) {
+      fullSizeBtn.setAttribute('aria-pressed', useFullSize ? 'true' : 'false');
+      fullSizeBtn.textContent = useFullSize ? 'Full size ✓' : 'Full size';
+    }
+  }
+
   function preloadAdjacent() {
     preloadRunId++;
     var thisRun = preloadRunId;
@@ -364,11 +486,11 @@
     var queue = [];
     for (var d = 1; d <= n; d++) {
       if (currentIndex + d < triggers.length) {
-        var src = triggers[currentIndex + d].getAttribute('data-full');
+        var src = getViewerSrc(triggers[currentIndex + d]);
         if (src) queue.push(src);
       }
       if (currentIndex - d >= 0) {
-        src = triggers[currentIndex - d].getAttribute('data-full');
+        src = getViewerSrc(triggers[currentIndex - d]);
         if (src) queue.push(src);
       }
     }
@@ -387,7 +509,7 @@
     if (index < 0 || index >= triggers.length) return;
     currentIndex = index;
     var trigger = triggers[index];
-    var src = trigger.getAttribute('data-full');
+    var src = getViewerSrc(trigger);
     var alt = (trigger.querySelector('img') && trigger.querySelector('img').alt) || '';
     currentImageSrc = src;
     img.removeAttribute('src');
@@ -400,10 +522,12 @@
     document.body.style.top = '-' + window.scrollY + 'px';
     updateNavButtons();
     img.alt = alt;
-    var downloadUrl = trigger.getAttribute('data-download') || src;
+    var downloadUrl = trigger.getAttribute('data-download') || trigger.getAttribute('data-full');
     downloadBtn.href = downloadUrl;
     downloadBtn.download = downloadUrl.split('/').pop();
     img.src = src;
+    if (minimapThumb) minimapThumb.src = trigger.getAttribute('data-full') || src;
+    if (minimapEl) { minimapEl.hidden = true; minimapEl.setAttribute('aria-hidden', 'true'); }
     if (img.complete) {
       hideLoading();
       preloadAdjacent();
@@ -411,7 +535,7 @@
       showLoading();
     }
     if (sharePopup) { sharePopup.hidden = true; if (shareBtn) shareBtn.setAttribute('aria-expanded', 'false'); }
-    updateUrlForImage(src);
+    updateUrlForImage(trigger.getAttribute('data-full'));
   }
 
   function imageFilenameFromSrc(src) {
@@ -420,32 +544,30 @@
     return parts[parts.length - 1] || '';
   }
 
-  function updateUrlForImage(src) {
-    var filename = imageFilenameFromSrc(src);
+  function updateUrlForImage(displaySrc) {
+    var filename = displaySrc ? imageFilenameFromSrc(displaySrc) : '';
     if (!filename) return;
-    var base = document.location.pathname.replace(/\/$/, '');
-    base = base.replace(/\/[^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP)$/i, '') || '/';
-    var newUrl = (base === '/' ? '' : base) + '/' + encodeURIComponent(filename);
-    if (document.location.pathname !== newUrl) {
+    var pathname = document.location.pathname.replace(/\/$/, '') || '/';
+    pathname = pathname.replace(/\/[^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP)$/i, '') || '/';
+    if (pathname !== '/') pathname += '/';
+    var newUrl = pathname + '#' + encodeURIComponent(filename);
+    if (document.location.pathname + document.location.hash !== newUrl) {
       history.pushState({ galleryImage: filename }, '', newUrl);
     }
   }
 
   function clearUrlImage() {
-    var pathname = document.location.pathname;
-    if (pathname.match(/\/([^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP))$/i)) {
-      var galleryPath = pathname.replace(/\/[^/]+$/, '') || '/';
-      if (!/\/$/.test(galleryPath)) galleryPath += '/';
-      history.replaceState(null, '', galleryPath);
+    if (document.location.hash) {
+      history.replaceState(null, '', document.location.pathname);
     }
   }
 
   function filenameFromUrl() {
+    var hash = document.location.hash.slice(1);
+    if (hash) return decodeURIComponent(hash);
     var pathname = document.location.pathname;
     var pathMatch = pathname.match(/\/([^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP))$/i);
     if (pathMatch) return decodeURIComponent(pathMatch[1]);
-    var hash = document.location.hash.slice(1);
-    if (hash) return decodeURIComponent(hash);
     return null;
   }
 
@@ -476,6 +598,7 @@
     window.scrollTo(0, parseInt(scrollY || '0') * -1);
     resetZoom();
     currentIndex = -1;
+    if (minimapEl) { minimapEl.hidden = true; minimapEl.setAttribute('aria-hidden', 'true'); }
     clearUrlImage();
   }
 
@@ -493,6 +616,11 @@
   } else {
     openImageFromUrl();
   }
+
+  window.addEventListener('photos-gallery-ready', function() {
+    collectTriggers();
+    openImageFromUrl();
+  });
 
   function prev() {
     if (scale > 1) return;
@@ -523,6 +651,26 @@
   prevBtn.addEventListener('click', function(e) { e.stopPropagation(); prev(); });
   nextBtn.addEventListener('click', function(e) { e.stopPropagation(); next(); });
 
+  if (fullSizeBtn) {
+    updateFullSizeButton();
+    fullSizeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      useFullSize = !useFullSize;
+      setFullSizePreference(useFullSize);
+      updateFullSizeButton();
+      if (currentIndex >= 0 && currentIndex < triggers.length) {
+        var trigger = triggers[currentIndex];
+        var newSrc = getViewerSrc(trigger);
+        if (newSrc && newSrc !== currentImageSrc) {
+          currentImageSrc = newSrc;
+          showLoading();
+          img.removeAttribute('src');
+          img.src = newSrc;
+        }
+      }
+    });
+  }
+
   if (shareBtn && sharePopup) {
     shareBtn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -534,7 +682,10 @@
       el.addEventListener('click', function(e) {
         e.preventDefault();
         var action = el.getAttribute('data-share');
-        var shareUrl = window.location.origin + document.location.pathname;
+        var pathname = document.location.pathname;
+        var galleryPath = pathname.replace(/\/[^/]+\.(?:jpe?g|JPE?G|png|PNG|gif|GIF|webp|WEBP)$/i, '') || '/';
+        if (galleryPath !== '/' && !/\/$/.test(galleryPath)) galleryPath += '/';
+        var shareUrl = window.location.origin + galleryPath;
         if (action === 'whatsapp') {
           window.open('https://wa.me/?text=' + encodeURIComponent(shareUrl), '_blank', 'noopener');
         } else if (action === 'facebook') {
@@ -566,11 +717,15 @@
       resetZoom();
     } else {
       var rect = inner.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
-      scale = 2.5;
-      translateX = -x * 0.6;
-      translateY = -y * 0.6;
+      var px = e.clientX - rect.left;
+      var py = e.clientY - rect.top;
+      var innerW = inner.clientWidth;
+      var innerH = inner.clientHeight;
+      var newScale = 2.5;
+      var scaleFactor = newScale / scale;
+      translateX = (px - innerW / 2) * (1 - scaleFactor) + translateX * scaleFactor;
+      translateY = (py - innerH / 2) * (1 - scaleFactor) + translateY * scaleFactor;
+      scale = newScale;
       img.classList.add('zooming');
       updateTransform();
       if (typeof updateCursor === 'function') updateCursor();
@@ -612,12 +767,16 @@
         if (scale > 1) {
           resetZoom();
         } else {
-          scale = 2.5;
           var rect = inner.getBoundingClientRect();
-          var tapX = e.touches[0].clientX - rect.left - rect.width / 2;
-          var tapY = e.touches[0].clientY - rect.top - rect.height / 2;
-          translateX = -tapX * 0.6;
-          translateY = -tapY * 0.6;
+          var px = e.touches[0].clientX - rect.left;
+          var py = e.touches[0].clientY - rect.top;
+          var innerW = inner.clientWidth;
+          var innerH = inner.clientHeight;
+          var newScale = 2.5;
+          var scaleFactor = newScale / scale;
+          translateX = (px - innerW / 2) * (1 - scaleFactor) + translateX * scaleFactor;
+          translateY = (py - innerH / 2) * (1 - scaleFactor) + translateY * scaleFactor;
+          scale = newScale;
           updateTransform();
         }
         lastTapTime = 0;
@@ -696,12 +855,22 @@
     if (overlay.hidden) return;
     e.preventDefault();
     var delta = e.deltaY > 0 ? 0.9 : 1.1;
-    var newScale = scale * delta;
-    scale = Math.max(1, Math.min(newScale, 5));
-    if (scale === 1) {
+    var newScale = Math.max(1, Math.min(scale * delta, 5));
+    if (newScale === scale) return;
+    if (newScale === 1) {
       translateX = 0;
       translateY = 0;
+    } else {
+      var rect = inner.getBoundingClientRect();
+      var px = e.clientX - rect.left;
+      var py = e.clientY - rect.top;
+      var innerW = inner.clientWidth;
+      var innerH = inner.clientHeight;
+      var scaleFactor = newScale / scale;
+      translateX = (px - innerW / 2) * (1 - scaleFactor) + translateX * scaleFactor;
+      translateY = (py - innerH / 2) * (1 - scaleFactor) + translateY * scaleFactor;
     }
+    scale = newScale;
     updateTransform();
   }, { passive: false });
 
