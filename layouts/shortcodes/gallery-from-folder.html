@@ -3,12 +3,30 @@
 {{- $displaySize := .Get "displaySize" | default "1920x" -}}
 {{- $class := .Get "class" | default "sequential-grid" -}}
 {{- $preloadAhead := .Get "preloadAhead" | default "2" -}}
+{{- $pinnedParam := .Get "pinned" | default "" -}}
 {{- if $folder -}}
   {{- $pattern := printf "%s/*.jpg" (strings.TrimSuffix "/" $folder) -}}
-  {{- $images := resources.Match $pattern -}}
-  {{- $images = sort $images "Name" -}}
+  {{- $allImages := resources.Match $pattern -}}
+  {{- $allImages = sort $allImages "Name" -}}
+  {{- $pinnedNames := slice -}}
+  {{- if $pinnedParam -}}
+    {{- range split $pinnedParam "," -}}
+      {{- $t := trim . " " -}}
+      {{- if $t -}}{{- $pinnedNames = $pinnedNames | append $t -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $ordered := slice -}}
+  {{- range $pinnedNames -}}
+    {{- $pname := . -}}
+    {{- range $allImages -}}
+      {{- if eq (path.Base .Name) $pname -}}{{- $ordered = $ordered | append . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range $allImages -}}
+    {{- if not (in $pinnedNames (path.Base .Name)) -}}{{- $ordered = $ordered | append . -}}{{- end -}}
+  {{- end -}}
   <div class="{{ $class }}" data-preload-ahead="{{ $preloadAhead }}">
-    {{- range $images -}}
+    {{- range $ordered -}}
       {{- $fullURL := .RelPermalink -}}
       {{- $thumb := .Resize $size -}}
       {{- $display := .Resize $displaySize -}}
