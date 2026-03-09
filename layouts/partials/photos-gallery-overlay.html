@@ -400,8 +400,9 @@
     document.body.style.top = '-' + window.scrollY + 'px';
     updateNavButtons();
     img.alt = alt;
-    downloadBtn.href = src;
-    downloadBtn.download = src.split('/').pop();
+    var downloadUrl = trigger.getAttribute('data-download') || src;
+    downloadBtn.href = downloadUrl;
+    downloadBtn.download = downloadUrl.split('/').pop();
     img.src = src;
     if (img.complete) {
       hideLoading();

@@ -1,5 +1,6 @@
 {{- $folder := .Get "folder" | default "" -}}
 {{- $size := .Get "size" | default "800x" -}}
+{{- $displaySize := .Get "displaySize" | default "1920x" -}}
 {{- $class := .Get "class" | default "sequential-grid" -}}
 {{- $preloadAhead := .Get "preloadAhead" | default "2" -}}
 {{- if $folder -}}
@@ -10,8 +11,9 @@
     {{- range $images -}}
       {{- $fullURL := .RelPermalink -}}
       {{- $thumb := .Resize $size -}}
+      {{- $display := .Resize $displaySize -}}
       <div class="masonry-item">
-        <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $fullURL }}" title="View full size">
+        <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $display.RelPermalink }}" data-download="{{ $fullURL }}" title="View full size">
           <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy">
         </span>
       </div>
