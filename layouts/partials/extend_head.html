@@ -1,3 +1,12 @@
+{{- /* Landing page: full-width main, no margin/padding, less gap below header */ -}}
+<style>
+  .main:has(.carousel-bleed) {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
 {{- /* Google Analytics */ -}}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CSYQWJ8BRQ"></script>
 <script>

@@ -1,11 +1,18 @@
 {{- $images := split (.Get "images") "," -}}
+{{- $link := .Get "link" -}}
 <div class="carousel">
   {{- range $i, $img := $images -}}
   {{- $src := strings.TrimSpace $img -}}
   {{- with resources.Get $src -}}
   {{- $resized := .Resize "1600x" -}}
   <div class="carousel-slide{{ if eq $i 0 }} active{{ end }}">
+    {{- if $link -}}
+    <a href="{{ $link }}" style="display: block;">
+    {{- end -}}
     <img src="{{ $resized.RelPermalink }}" width="{{ $resized.Width }}" height="{{ $resized.Height }}" alt="" loading="lazy" class="carousel-img">
+    {{- if $link -}}
+    </a>
+    {{- end -}}
   </div>
   {{- end -}}
   {{- end -}}

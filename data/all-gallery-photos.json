@@ -1,0 +1,149 @@
+{
+  "categories": [
+    {
+      "category": "amphibians-and-reptiles",
+      "basePath": "/amphibians-and-reptiles/",
+      "photos": [
+        "IMG_0266 copy.jpg",
+        "IMG_1228.jpg",
+        "IMG_4566.JPG"
+      ]
+    },
+    {
+      "category": "arachnids",
+      "basePath": "/arachnids/",
+      "photos": [
+        "74BC866C-C540-4405-B8AC-46E1FFC0A713.jpg",
+        "AdobeStateHistoryPark_034.jpg",
+        "AdobeStateHistoryPark_037-2.jpg",
+        "Bird Dropping Spider-1.jpg",
+        "IMG_0015-2.jpg",
+        "IMG_0015.jpg",
+        "IMG_0021-2.jpg",
+        "IMG_0021.jpg",
+        "IMG_0050.jpg",
+        "IMG_0084.jpg",
+        "IMG_0090-3.jpg",
+        "IMG_0208.jpg",
+        "IMG_0260.jpg",
+        "IMG_0499.jpg",
+        "IMG_0720_R6m3_20260306-2.JPG",
+        "Okere Falls-2.jpg",
+        "Spider.jpg",
+        "Te Puke 2026-01-10-38.jpg"
+      ]
+    },
+    {
+      "category": "birds",
+      "basePath": "/birds/",
+      "photos": [
+        "IMG_0074.jpg",
+        "IMG_0230-2.jpg",
+        "IMG_0452.jpg",
+        "IMG_1577 (3).JPG",
+        "IMG_2749 (2).jpg",
+        "IMG_4537.jpg",
+        "IMG_4698.jpg",
+        "IMG_7032 (1).JPG",
+        "IMG_7261.JPG",
+        "IMG_7653.jpg",
+        "IMG_7687 (2).JPG",
+        "KirbyCove_074-2.jpg",
+        "Owl Petaluma.jpg",
+        "Petaluma Hawk.jpg",
+        "Tui Te Arero Bay  2026-01-11-12.jpg"
+      ]
+    },
+    {
+      "category": "fungi",
+      "basePath": "/fungi/",
+      "photos": [
+        "IMG_0106-3.jpg"
+      ]
+    },
+    {
+      "category": "insects",
+      "basePath": "/insects/",
+      "photos": [
+        "20260226_IMG_0304-4.jpg",
+        "Dragonfly Petaluma.jpg",
+        "IMG_0004.jpg",
+        "IMG_0011.jpg",
+        "IMG_0026.jpg",
+        "IMG_0033.jpg",
+        "IMG_0035.jpg",
+        "IMG_0060.jpg",
+        "IMG_0082.jpg",
+        "IMG_0113.jpg",
+        "IMG_0142-2.jpg",
+        "IMG_0159-5.jpg",
+        "IMG_0176.jpg",
+        "IMG_0177.jpg",
+        "IMG_0212.jpg",
+        "IMG_0221.jpg",
+        "IMG_0252.jpg",
+        "IMG_0255-2.jpg",
+        "IMG_0257_R6_Mark_III_20260228-4.jpg",
+        "IMG_0266-6.jpg",
+        "IMG_0266-7.jpg",
+        "IMG_0280_R6_Mark_III_20260228-2.jpg",
+        "IMG_0294.jpg",
+        "IMG_0416-2.jpg",
+        "IMG_0485.jpg",
+        "IMG_0536_R6m3_20260304-2.jpg",
+        "IMG_0568-2.jpg",
+        "IMG_0629-2.jpg",
+        "IMG_0742.jpg",
+        "IMG_0835.JPG",
+        "IMG_1134.jpg",
+        "IMG_5663-2.jpg",
+        "Moth Petaluma-2.jpg",
+        "Okataina  Damselfy-1.jpg",
+        "Okere Falls.jpg",
+        "Okere-3.jpg",
+        "Okere-4.jpg",
+        "Spider-1.jpg",
+        "Te Puke 2026-01-10-02.jpg",
+        "Te Puke 2026-01-10-31.jpg",
+        "Te Puke-1.jpg"
+      ]
+    },
+    {
+      "category": "landscapes",
+      "basePath": "/landscapes/",
+      "photos": [
+        "20260119-IMG_0191.jpg",
+        "IMG_0126-3.jpg",
+        "IMG_0336.jpg",
+        "IMG_0643_R6m3_20260306.JPG"
+      ]
+    },
+    {
+      "category": "mammals",
+      "basePath": "/mammals/",
+      "photos": [
+        "IMG_2737.jpg"
+      ]
+    },
+    {
+      "category": "plants",
+      "basePath": "/plants/",
+      "photos": [
+        "IMG_0360.jpg",
+        "IMG_0469.jpg",
+        "IMG_0529_R6m3_20260304-2.jpg",
+        "IMG_0560_R6m3_20260304.jpg",
+        "IMG_0704.jpg",
+        "IMG_3710.jpg"
+      ]
+    },
+    {
+      "category": "sports",
+      "basePath": "/sports/",
+      "photos": [
+        "IMG_1463.JPG",
+        "IMG_3469.JPG"
+      ]
+    }
+  ]
+}
