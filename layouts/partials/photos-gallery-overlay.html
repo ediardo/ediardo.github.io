@@ -397,6 +397,7 @@
     clampTranslation();
     img.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
     updateMinimap();
+    updateNavButtons();
   }
 
   function updateMinimap() {
@@ -633,8 +634,9 @@
   }
 
   function updateNavButtons() {
-    prevBtn.style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
-    nextBtn.style.visibility = currentIndex < triggers.length - 1 ? 'visible' : 'hidden';
+    var show = scale <= 1;
+    prevBtn.style.visibility = show && currentIndex > 0 ? 'visible' : 'hidden';
+    nextBtn.style.visibility = show && currentIndex < triggers.length - 1 ? 'visible' : 'hidden';
   }
 
   document.addEventListener('click', function(e) {
