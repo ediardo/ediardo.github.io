@@ -1,4 +1,5 @@
 <div style="text-align: center; padding: 1em 0;">
+  <img src="/me.jpeg" alt="Edi" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 0.5em;">
   <h3 style="margin: 1em 0; line-height: 1.5;">
     I am Edi, a software engineer and photographer building  <a href="https://www.linkacam.com" target="_blank">tools for nature photographers</a>
   </h3>
