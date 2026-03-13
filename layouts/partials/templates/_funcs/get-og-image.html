@@ -1,0 +1,16 @@
+{{- $ogURL := "" -}}
+{{- if .Params.cover.image -}}
+  {{- $coverPath := strings.TrimPrefix "/" .Params.cover.image -}}
+  {{- $cover := resources.Get $coverPath -}}
+  {{- if $cover -}}
+    {{- $resized := $cover.Fill "1200x630" -}}
+    {{- $ogURL = $resized.Permalink -}}
+  {{- else -}}
+    {{- if (ne .Params.cover.relative true) -}}
+      {{- $ogURL = .Params.cover.image | absURL -}}
+    {{- else -}}
+      {{- $ogURL = (path.Join .RelPermalink .Params.cover.image) | absURL -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $ogURL -}}

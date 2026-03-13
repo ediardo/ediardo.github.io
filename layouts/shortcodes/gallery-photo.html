@@ -4,7 +4,7 @@
 {{- with resources.Get $src -}}
   {{- $fullURL := .RelPermalink -}}
   {{- $img := .Resize $size -}}
-  <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $fullURL }}" title="View full size">
+  <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $fullURL }}" title="View max quality">
     <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $alt }}" loading="lazy">
   </span>
 {{- else -}}

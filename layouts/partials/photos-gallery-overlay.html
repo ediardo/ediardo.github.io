@@ -22,7 +22,7 @@
   </div>
   <footer class="photos-overlay-footer">
     <div class="photos-overlay-footer-actions">
-      <button type="button" class="photos-overlay-fullsize-toggle" id="photos-overlay-fullsize-btn" aria-label="Toggle full size image" aria-pressed="false">Full size</button>
+      <button type="button" class="photos-overlay-fullsize-toggle" id="photos-overlay-fullsize-btn" aria-label="Toggle max quality image" aria-pressed="false">Max Quality</button>
       <a class="photos-overlay-download" id="photos-overlay-download-btn" aria-label="Download image" download>&#8681; Download</a>
       <div class="photos-overlay-share-wrap">
         <button type="button" class="photos-overlay-share" aria-label="Share" aria-haspopup="true" aria-expanded="false">Share</button>
@@ -476,7 +476,7 @@
   function updateFullSizeButton() {
     if (fullSizeBtn) {
       fullSizeBtn.setAttribute('aria-pressed', useFullSize ? 'true' : 'false');
-      fullSizeBtn.textContent = useFullSize ? 'Full size ✓' : 'Full size';
+      fullSizeBtn.textContent = useFullSize ? 'Max Quality ✓' : 'Max Quality';
     }
   }
 

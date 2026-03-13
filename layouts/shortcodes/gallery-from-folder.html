@@ -31,7 +31,7 @@
       {{- $thumb := .Resize $size -}}
       {{- $display := .Resize $displaySize -}}
       <div class="masonry-item">
-        <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $display.RelPermalink }}" data-download="{{ $fullURL }}" title="View full size">
+        <span class="gallery-photo-trigger" role="button" tabindex="0" data-full="{{ $display.RelPermalink }}" data-download="{{ $fullURL }}" title="View max quality">
           <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="" loading="lazy">
         </span>
       </div>
