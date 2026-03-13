@@ -17,6 +17,7 @@ weight = 1
   <a href="/photos/mammals/" class="photo-block">{{< photo src="photos/IMG_2737.jpg" alt="" >}}<span class="photo-label">Mammals</span></a>
   <a href="/photos/plants/" class="photo-block">{{< photo src="photos/IMG_0704.jpg" alt="" >}}<span class="photo-label">Plants</span></a>
   <a href="/photos/sports/" class="photo-block">{{< photo src="photos/IMG_3469.JPG" alt="" >}}<span class="photo-label">Sports</span></a>
+  <a href="/photos/p/tomales-bay/" class="photo-block">{{< photo src="photos/p/tomales-bay/IMG_1192.JPG" alt="" >}}<span class="photo-label">Tomales Bay</span></a>
 
 <style>
 .photo-blocks {
