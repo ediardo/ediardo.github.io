@@ -139,6 +139,10 @@
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s ease;
+}
+.photos-overlay-minimap.idle {
+  opacity: 0.5;
 }
 .photos-overlay-minimap[hidden] { display: none !important; }
 .photos-overlay-minimap-thumb-wrap {
@@ -365,6 +369,23 @@
   var initialTranslateY = 0;
   var isPanning = false;
 
+  var MINIMAP_IDLE_DELAY_MS = 500;
+  var minimapIdleTimer = 0;
+  function scheduleMinimapIdle() {
+    if (!minimapEl || overlay.hidden) return;
+    clearTimeout(minimapIdleTimer);
+    minimapEl.classList.remove('idle');
+    minimapIdleTimer = setTimeout(function() {
+      minimapIdleTimer = 0;
+      if (minimapEl && !minimapEl.hidden) minimapEl.classList.add('idle');
+    }, MINIMAP_IDLE_DELAY_MS);
+  }
+  function cancelMinimapIdle() {
+    clearTimeout(minimapIdleTimer);
+    minimapIdleTimer = 0;
+    if (minimapEl) minimapEl.classList.remove('idle');
+  }
+
   function collectTriggers() {
     triggers = Array.prototype.slice.call(document.querySelectorAll('.gallery-photo-trigger'));
   }
@@ -398,6 +419,7 @@
     img.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
     updateMinimap();
     updateNavButtons();
+    if (minimapEl && !minimapEl.hidden) scheduleMinimapIdle();
   }
 
   function updateMinimap() {
@@ -426,6 +448,7 @@
     minimapViewport.style.top = (topFrac * 100) + '%';
     minimapViewport.style.width = (widthFrac * 100) + '%';
     minimapViewport.style.height = (heightFrac * 100) + '%';
+    scheduleMinimapIdle();
   }
 
   var currentImageSrc = '';
@@ -599,6 +622,7 @@
     window.scrollTo(0, parseInt(scrollY || '0') * -1);
     resetZoom();
     currentIndex = -1;
+    cancelMinimapIdle();
     if (minimapEl) { minimapEl.hidden = true; minimapEl.setAttribute('aria-hidden', 'true'); }
     clearUrlImage();
   }
@@ -896,6 +920,8 @@
   });
 
   document.addEventListener('mousemove', function(e) {
+    if (overlay.hidden) return;
+    if (minimapEl && !minimapEl.hidden) scheduleMinimapIdle();
     if (!isMousePanning) return;
     var dx = e.clientX - mouseStartX;
     var dy = e.clientY - mouseStartY;
