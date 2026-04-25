@@ -2,46 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/contact/</loc>
+    <loc>https://ediardo.com/contact/</loc>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://ediardo.com/about/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/amphibians-and-reptiles/</loc>
+    <loc>https://ediardo.com/photos/amphibians-and-reptiles/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/p/lokahi-occ-canoe-blessing-2026/</loc>
+    <loc>https://ediardo.com/photos/p/lokahi-occ-canoe-blessing-2026/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/marcopolo-poker-night-feb-28/</loc>
+    <loc>https://ediardo.com/photos/marcopolo-poker-night-feb-28/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/</loc>
+    <loc>https://ediardo.com/photos/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/birds/</loc>
+    <loc>https://ediardo.com/photos/birds/</loc>
   </url><url>
-    <loc>http://localhost:1313/projects/</loc>
+    <loc>https://ediardo.com/projects/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/p/tomales-bay/</loc>
+    <loc>https://ediardo.com/photos/p/tomales-bay/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/fungi/</loc>
+    <loc>https://ediardo.com/photos/fungi/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/insects/</loc>
+    <loc>https://ediardo.com/photos/insects/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/landscapes/</loc>
+    <loc>https://ediardo.com/photos/landscapes/</loc>
   </url><url>
-    <loc>http://localhost:1313/reads/</loc>
+    <loc>https://ediardo.com/reads/</loc>
   </url><url>
-    <loc>http://localhost:1313/links/</loc>
+    <loc>https://ediardo.com/photos/mammals/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/mammals/</loc>
+    <loc>https://ediardo.com/photos/plants/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/plants/</loc>
+    <loc>https://ediardo.com/photos/sports/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/sports/</loc>
+    <loc>https://ediardo.com/photos/arachnids/</loc>
   </url><url>
-    <loc>http://localhost:1313/photos/arachnids/</loc>
+    <loc>https://ediardo.com/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://ediardo.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://ediardo.com/links/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://ediardo.com/signup/</loc>
+  </url><url>
+    <loc>https://ediardo.com/tags/</loc>
   </url>
 </urlset>
