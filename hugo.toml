@@ -3,6 +3,19 @@ languageCode = 'en-us'
 title = "Edi's Website"
 theme = 'PaperMod'
 
+[module]
+[[module.mounts]]
+source = 'content'
+target = 'content'
+[[module.mounts]]
+source = 'content/links/_index.md'
+target = 'content/signup/_index.md'
+
+[[menus.main]]
+name = 'links'
+url = '/links/'
+weight = 6
+
 [markup.goldmark.renderer]
     unsafe = true
 
